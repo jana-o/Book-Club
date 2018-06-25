@@ -1,8 +1,59 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
 a {
-  color: #00B7FF; }
+  color: #00b7ff; }
+
+h1 {
+  font: "Georgia", serif; }
+
+.navbar {
+  margin-bottom: 0;
+  border-radius: 0;
+  background-color: #03a89e;
+  padding: 1% 0;
+  font-size: 1.2em;
+  border: 0;
+  color: white; }
+
+.navbar-brand {
+  float: left;
+  min-height: 55px;
+  padding: 0 15px 5px; }
+
+.navbar-inverse .navbar-nav .active a,
+.navbar-inverse .navbar-nav .active a:focus,
+.navbar-inverse .navbar-nav .active a:hover {
+  color: #ffffff;
+  background-color: #03a89e; }
+
+.navbar-inverse .navbar-nav li a {
+  color: #d5d5d5; }
+
+footer {
+  background-color: #e3e3e3;
+  color: black;
+  position: fixed;
+  bottom: 0; }
+
+.footer-copyright {
+  background-color: #d5d5d5;
+  height: 50px;
+  margin: auto; }
+
+.headerPic {
+  background-image: url(../images/Tianjin-Binhai.jpg);
+  text-align: center;
+  color: #03a89e;
+  clear: both;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  position: relative; }
+
+@media (max-width: 600px) {
+  footer {
+    display: none; } }
 
 /*# sourceMappingURL=style.css.map */
