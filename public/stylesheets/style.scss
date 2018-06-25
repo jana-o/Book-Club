@@ -3,7 +3,7 @@ body {
 }
 
 a {
-  color: #00b7ff;
+  color: #3d3b3b;
 }
 
 h1 {
@@ -21,27 +21,15 @@ h1 {
 }
 
 .navbar-brand {
-  float: left;
   min-height: 55px;
   padding: 0 15px 5px;
 }
 
-.navbar-inverse .navbar-nav .active a,
-.navbar-inverse .navbar-nav .active a:focus,
-.navbar-inverse .navbar-nav .active a:hover {
-  color: #ffffff;
-  background-color: #03a89e;
-}
-
-.navbar-inverse .navbar-nav li a {
-  color: #d5d5d5;
-}
-
 footer {
   background-color: #e3e3e3;
-  color: black;
-  position: fixed;
-  bottom: 0;
+  color: #3d3b3b;
+  // position: fixed;
+  // bottom: 0;
 }
 
 .footer-copyright {
@@ -54,12 +42,11 @@ footer {
 .headerPic {
   background-image: url(../images/Tianjin-Binhai.jpg);
   text-align: center;
-  color: #03a89e;
-
+  //color: #03a89e;
   clear: both;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
+  height: 60vh;
   width: 100vw;
   position: relative;
 }
@@ -69,3 +56,19 @@ footer {
     display: none;
   }
 }
+
+#product {
+  margin: 0px;
+}
+
+.row {
+  margin: 0px;
+  margin-top: 30px;
+}
+
+#about {
+  background-color: #03a89e;
+  color: white;
+}
+
+//Carousel
