@@ -1,11 +1,16 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+@import url("https://fonts.googleapis.com/css?family=Georgia");
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+  font: 14px "Open Sans", Helvetica, Arial, sans-serif; }
 
 a {
   color: #3d3b3b; }
 
-h1 {
-  font: "Georgia", serif; }
+h1,
+h2,
+h3 {
+  font-family: Georgia, Times, "Times New Roman", serif;
+  font-weight: 500; }
 
 .navbar {
   margin-bottom: 0;
@@ -25,9 +30,29 @@ footer {
   color: #3d3b3b; }
 
 .footer-copyright {
-  background-color: #d5d5d5;
-  height: 50px;
-  margin: auto; }
+  color: #616161;
+  font-size: 0.8125rem;
+  line-height: 1.625rem;
+  display: inline;
+  margin: 0;
+  padding: 0;
+  text-decoration: none; }
+
+.footer-copyright li {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  list-style-type: none; }
+
+.footer-copyright li:after {
+  content: " | ";
+  margin-left: 0.46875rem;
+  margin-right: 0.46875rem; }
+
+.footer-separator--thin {
+  height: 0.0625 rem;
+  background: black;
+  border: 0; }
 
 .headerPic {
   background-image: url(../images/Tianjin-Binhai.jpg);
@@ -44,7 +69,8 @@ footer {
     display: none; } }
 
 #product {
-  margin: 0px; }
+  margin: 0px;
+  padding: 30px; }
 
 .row {
   margin: 0px;
@@ -52,18 +78,7 @@ footer {
 
 #about {
   background-color: #03a89e;
-  color: white; }
-
-.carousel-caption {
-  top: 50%;
-  transform: translateY(-50%);
-  text-transform: uppercase; }
-
-.carousel-inner > .item > a > img,
-.carousel-inner > .item > img,
-.img-responsive {
-  height: 25%;
-  max-height: 25%;
-  width: 100%; }
+  color: white;
+  padding: 30px; }
 
 /*# sourceMappingURL=style.css.map */
