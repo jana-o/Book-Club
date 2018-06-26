@@ -38,7 +38,7 @@ authRoutes.post("/signup", (req, res, next) => {
   User.findOne({ email }, "email", (err, email) => {
     if (email !== null) {
       res.render("auth/signup", {
-        message: 'The email is already in use, please login via the link below.'
+        message: "The email is already in use, please login via the link below."
       });
       return;
     }
@@ -63,23 +63,32 @@ authRoutes.post("/signup", (req, res, next) => {
 });
 
 /// facebook login routes
-authRoutes.get("/facebook", passport.authenticate("facebook", { scope: ['email'] }));
-authRoutes.get("/facebook/callback", passport.authenticate("facebook", {
-  successRedirect: "/",
-  failureRedirect: "/login"
-}));
+authRoutes.get(
+  "/facebook",
+  passport.authenticate("facebook", { scope: ["email"] })
+);
+authRoutes.get(
+  "/facebook/callback",
+  passport.authenticate("facebook", {
+    successRedirect: "/",
+    failureRedirect: "/login"
+  })
+);
 
 /// login routes
 authRoutes.get("/login", (req, res, next) => {
-  res.render("auth/login", { "message": req.flash("error") });
+  res.render("auth/login", { message: req.flash("error") });
 });
 
-authRoutes.post("/login", passport.authenticate("local", {
-  successRedirect: "/",
-  failureRedirect: "/auth/login",
-  failureFlash: true,
-  passReqToCallback: true
-}));
+authRoutes.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/auth/login",
+    failureFlash: true,
+    passReqToCallback: true
+  })
+);
 
 /// logout route
 authRoutes.get("/logout", (req, res) => {
