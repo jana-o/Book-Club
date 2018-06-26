@@ -22,7 +22,7 @@ router.get("/", (req, res, next) => {
 
 /* GET home page */
 router.get("/home", ensureAuthenticated, (req, res, next) => {
-  res.render("home");
+  res.render("home", { layout: "layoutB.hbs" });
 });
 
 /* GET Profile*/
@@ -31,7 +31,7 @@ router.get("/user/:id", ensureAuthenticated, (req, res, next) => {
   console.log(userId);
   User.findOne({ _id: userId })
     .then(user => {
-      res.render("profile", { user });
+      res.render("profile", { user, layout: "layoutB.hbs" });
     })
     .catch(error => {
       console.log(error);
@@ -42,7 +42,7 @@ router.get("/user/:id", ensureAuthenticated, (req, res, next) => {
 router.get("/browse", ensureAuthenticated, (req, res, next) => {
   Club.find()
     .then(club => {
-      res.render("club/browse", { club });
+      res.render("club/browse", { club, layout: "layoutB.hbs" });
     })
     .catch(error => {
       console.log(error);
@@ -54,7 +54,7 @@ router.get("/club/:id", ensureAuthenticated, (req, res, next) => {
   let clubId = req.params.id;
   Club.findOne({ _id: clubId })
     .then(club => {
-      console.log(club)
+      console.log(club);
       res.render("club/clubProfile", { club });
     })
     .catch(error => {
