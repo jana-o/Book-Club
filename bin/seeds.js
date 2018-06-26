@@ -22,7 +22,7 @@ const clubs = [
         ISBN: 9781627938204
       }
     ],
-    icon: `/public/images/books.png`
+    icon: `/images/books.png`
   },
   {
     clubname: `Self-Improvement Club`,
@@ -40,25 +40,7 @@ const clubs = [
         ISBN: 9781409005216
       }
     ],
-    icon: `/public/images/books2.png`
-  },
-  {
-    clubname: `Crime/ Mystery Club`,
-    genre: `Crime`,
-    user: [],
-    currBook: {
-      title: `Murder on the Orient Express`,
-      author: `Agatha Christie`,
-      ISBN: 9780007422579
-    },
-    prevBooks: [
-      {
-        title: `The Big Sleep`,
-        author: `Raymond Chandler`,
-        ISBN: 9780394758282
-      }
-    ],
-    icon: `/public/images/books1.png`
+    icon: `/images/books2.png`
   },
   {
     clubname: `Popular Economics`,
@@ -76,7 +58,7 @@ const clubs = [
         ISBN: 9780141918921
       }
     ],
-    icon: `/public/images/books.png`
+    icon: `/images/books.png`
   },
   {
     clubname: `Crime/ Mystery Club`,
@@ -94,7 +76,7 @@ const clubs = [
         ISBN: 9780394758282
       }
     ],
-    icon: `/public/images/books1.png`
+    icon: `/images/books1.png`
   },
   {
     clubname: `High Fantasy Fan Club`,
@@ -112,7 +94,7 @@ const clubs = [
         ISBN: 9781473208452
       }
     ],
-    icon: `/public/images/books1.png`
+    icon: `/images/books1.png`
   }
 ];
 
