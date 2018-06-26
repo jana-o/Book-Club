@@ -54,6 +54,7 @@ router.get("/club/:id", ensureAuthenticated, (req, res, next) => {
   let clubId = req.params.id;
   Club.findOne({ _id: clubId })
     .then(club => {
+      console.log(club)
       res.render("club/clubProfile", { club });
     })
     .catch(error => {

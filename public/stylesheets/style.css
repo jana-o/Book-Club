@@ -86,4 +86,38 @@ footer {
   padding: 10% 20%;
   justify-content: space-around; }
 
+.club-content {
+  display: flex;
+  justify-content: center;
+  background-color: lightgrey;
+  margin-top: 5px;
+  padding: 5px;
+  border-radius: 5px; }
+
+.club-content > img {
+  margin: 20px 10px;
+  height: 20%;
+  width: 20%; }
+
+.club-content > h5 {
+  align-self: center; }
+
+#videos {
+  display: flex;
+  justify-content: center; }
+
+.video-container {
+  height: 70px;
+  width: 124px;
+  background-color: beige;
+  margin: 3px; }
+
+.container > .btn-danger {
+  margin-top: 5px; }
+
+.club-btn {
+  margin-top: 5px;
+  display: flex;
+  justify-content: center; }
+
 /*# sourceMappingURL=style.css.map */
