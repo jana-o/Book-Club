@@ -1,4 +1,12 @@
-<div>
-    <h1>Browse</h1>
-    {{#each club}} {{> clubCard this}} {{/each}}
+<h1>Browse clubs</h1>
+<div class="cards-container">
+    <div class="card-group">
+        <div class="row">
+            {{#each club}}
+            <div class="col-4">
+                {{> clubCard this}}
+            </div>
+            {{/each}}
+        </div>
+    </div>
 </div>
