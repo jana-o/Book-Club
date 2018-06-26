@@ -10,7 +10,7 @@ const userSchema = new Schema(
     clubs: Array,
     books: Array,
   },
-  {
+  {   
     timestamps: {
       createdAt: "created_at",
       updatedAt: "updated_at"

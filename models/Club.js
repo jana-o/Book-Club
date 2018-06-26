@@ -6,7 +6,7 @@ const clubSchema = new Schema(
     clubname: { type: String, unique: true },
     genre: String,
     user: Array,
-    currBook: String,
+    currBook: Object,
     prevBooks: Array,
     icon: String
   },
