@@ -76,7 +76,7 @@ const clubs = [
         ISBN: 9780394758282
       }
     ],
-    icon: `/images/books1.png`
+    icon: `/images/books.png`
   },
   {
     clubname: `High Fantasy Fan Club`,
@@ -94,7 +94,7 @@ const clubs = [
         ISBN: 9781473208452
       }
     ],
-    icon: `/images/books1.png`
+    icon: `/images/books.png`
   }
 ];
 
