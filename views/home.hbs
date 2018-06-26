@@ -1,20 +1,18 @@
-<div>Test</div>
+<h1>Home</h1>
+
 <div class="row">
     <div class="col-6">
-        <img class="card-img-top" src="{{user.icon}}" alt="User icon">
+        <img src="/images/lisaicon.png">
     </div>
     <div class="col-6">
-        <div>
-            <h1>
-                Hi {{user.username}}
-            </h1>
-        </div>
+        <h3>Hi
+            <span>{{ user.username}}</span> !
+        </h3>
     </div>
 </div>
 <div>
-    <h3>MY CLUBS</h3>
-    <div>
-        {{#each club}} {{> clubCard this}} {{/each}}
-    </div>
-    <p>{{#each club.prevBooks}} | {{this}} {{/each}}</p>
+    <h3>My favorite books</h3>
+</div>
+<div>
+    <h3>My book clubs</h3>
 </div>

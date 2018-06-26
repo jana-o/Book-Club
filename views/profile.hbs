@@ -12,8 +12,21 @@
 </div>
 <div>
     <h3>My favorite books</h3>
+    {{#each user}}
+    <ul>
+        <li>
+            {{this.books}}
+        </li>
+    </ul>
+    {{/each}}
 </div>
 <div>
     <h3>My book clubs</h3>
-
+    {{#each user}}
+    <ul>
+        <li>
+            {{this.clubs}}
+        </li>
+    </ul>
+    {{/each}}
 </div>

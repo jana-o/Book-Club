@@ -28,24 +28,21 @@
     </button>
 
     <div class="collapse navbar-collapse navbar-right" id="navbarNav">
-      {{#if user.username}} {{username}}
+      {{#if user.username}}
       <ul class="navbar-nav navbar-right">
         <li class="nav-item active">
-          <a class="nav-link" href="/">Home
+          <a class="nav-link" href="/home">Home
             <span class="sr-only">(current)</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/home">Clubs</a>
+          <a class="nav-link" href="/browse">Browse</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/club/browse">Browse</a>
+          <a class="nav-link" href="/user/{{user._id}}">Profile</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/profile">Profile</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/logout">Log out</a>
+          <a class="nav-link" href="/auth/logout">Log out</a>
         </li>
       </ul>
       {{else}}

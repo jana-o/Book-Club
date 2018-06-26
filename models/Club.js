@@ -5,16 +5,17 @@ const clubSchema = new Schema(
   {
     clubname: { type: String, unique: true },
     genre: String,
-    user: [{type: Schema.Types.ObjectId, ref: 'User'}],
+    users: [{type: Schema.Types.ObjectId, ref: 'User'}],
     currBook: Object,
-    prevBooks: [{type: Object}],
+    prevBooks: [{type: Schema.Types.Mixed}],
     icon: String
   },
   {
     timestamps: {
       createdAt: "created_at",
       updatedAt: "updated_at"
-    }
+    },
+    usePushEach: true
   }
 );
 
