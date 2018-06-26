@@ -13,14 +13,8 @@
 </div>
 <div>
     <h3>MY CLUBS</h3>
-    <ul> {{#each club.clubname}}
-        <li>
-            {{this.genre}}
-        </li>
-        <li>
-            {{this.currBook}}
-        </li>
-        {{/each}}
-    </ul>
+    <div>
+        {{#each club}} {{> clubCard this}} {{/each}}
+    </div>
     <p>{{#each club.prevBooks}} | {{this}} {{/each}}</p>
 </div>

@@ -1,1 +1,21 @@
-<div>Test Profile</div>
+<h1>Test Profile</h1>
+
+{{#if user}}
+<div class="row">
+    <div class="col-6">
+        <img src="images/books2.png" alt="Profile">
+    </div>
+    <div class="col-6">
+        <h3>Hi
+            <span>{{ user.username}}</span> !
+        </h3>
+    </div>
+</div>
+<div>
+    <h3>My favorite books</h3>
+</div>
+<div>
+    <h3>My book clubs</h3>
+
+</div>
+{{/if}}

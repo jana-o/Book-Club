@@ -1,11 +1,14 @@
 <div class="card-group">
     <div class="card">
-        <img class="card-img-top" src="{{this.icon}}" alt="Card image cap">
+        <img class="card-img-top mx-auto" src="{{this.icon}}" alt="Card image cap">
         <div class="card-body">
-            <h5 class="card-title">{{this.clubname}}</h5>
-
-            <h5 class="card-title">{{this.currBook.title}}</h5>
-            <h5 class="card-title">{{this.currBook.author}}</h5>
+            <a href="club/{{this._id}}">
+                <h5 class="card-title">{{this.clubname}}</h5>
+            </a>
+            <p class="card-title">
+                <strong>Current book: </strong>{{this.currBook.title}}</p>
+            <p class="card-title">
+                <strong>Author: </strong>{{this.currBook.author}}</p>
 
         </div>
     </div>

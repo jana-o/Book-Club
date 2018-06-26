@@ -1,7 +1,9 @@
+$primary: #ff0000;
+$secondary: #00ff00;
+
 @import url("https://fonts.googleapis.com/css?family=Open+Sans");
 @import url("https://fonts.googleapis.com/css?family=Georgia");
-// @import "node_module/bootstrap/scss/bootstrap";
-//$primary
+@import "node_modules/bootstrap/scss/bootstrap";
 
 body {
   font: 14px "Open Sans", Helvetica, Arial, sans-serif;
@@ -25,7 +27,6 @@ h3 {
   padding: 1% 0;
   font-size: 1.2em;
   border: 0;
-  color: white;
 }
 
 .navbar-brand {
@@ -107,7 +108,7 @@ footer {
 //Cards
 .cards-container {
   display: flex;
-  padding: 10% 20%;
+  // padding: 5% 5%;
   justify-content: space-around;
 }
 
@@ -148,4 +149,8 @@ footer {
   margin-top: 5px;
   display: flex;
   justify-content: center
+}
+.card-img-top {
+  width: 90%;
+  padding: 0.8em;
 }
