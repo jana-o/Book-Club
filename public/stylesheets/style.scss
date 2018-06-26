@@ -1,5 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans");
 @import url("https://fonts.googleapis.com/css?family=Georgia");
+// @import "node_module/bootstrap/scss/bootstrap";
+//$primary
+
 body {
   font: 14px "Open Sans", Helvetica, Arial, sans-serif;
 }
@@ -101,4 +104,9 @@ footer {
   padding: 30px;
 }
 
-//Carousel
+//Cards
+.cards-container {
+  display: flex;
+  padding: 10% 20%;
+  justify-content: space-around;
+}

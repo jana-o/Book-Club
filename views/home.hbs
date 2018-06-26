@@ -1,23 +1,26 @@
 <div>Test</div>
 <div class="row">
     <div class="col-6">
-        <img class="card-img-top" src="{{user.image}}" alt="Card image cap">
+        <img class="card-img-top" src="{{user.icon}}" alt="User icon">
     </div>
     <div class="col-6">
-        <a href="/movies">Go back</a>
-        <h1>{{movie.title}}</h1>
-        <h3>Director: {{movie.director}}</h3>
-
-        Stars
-        <ul> {{#each movie.stars}}
-            <li>
-                {{this}}
-            </li>
-            {{/each}}
-        </ul>
-        {{movie.stars}}
-
-        <p>{{movie.description}}</p>
-        <p>{{#each movie.showtimes}} | {{this}} {{/each}}</p>
+        <div>
+            <h1>
+                Hi {{user.username}}
+            </h1>
+        </div>
     </div>
+</div>
+<div>
+    <h3>MY CLUBS</h3>
+    <ul> {{#each club.clubname}}
+        <li>
+            {{this.genre}}
+        </li>
+        <li>
+            {{this.currBook}}
+        </li>
+        {{/each}}
+    </ul>
+    <p>{{#each club.prevBooks}} | {{this}} {{/each}}</p>
 </div>
