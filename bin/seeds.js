@@ -9,7 +9,7 @@ const clubs = [
   {
     clubname: `Entrepreneur Reading Circle`,
     genre: `Business`,
-    user: [],
+    users: [],
     currBook: {
       title: `The 4-Hour Work Week`,
       author: `Tim Ferriss`,
@@ -27,7 +27,7 @@ const clubs = [
   {
     clubname: `Self-Improvement Club`,
     genre: `Self-Improvement`,
-    user: [],
+    users: [],
     currBook: {
       title: `The Slight Edge`,
       author: `Jeff Olson`,
@@ -45,7 +45,7 @@ const clubs = [
   {
     clubname: `Popular Economics`,
     genre: `Economics`,
-    user: [],
+    users: [],
     currBook: {
       title: `Freakonomics`,
       author: `Steven D. Levitt`,
@@ -63,7 +63,7 @@ const clubs = [
   {
     clubname: `Crime/ Mystery Club`,
     genre: `Crime`,
-    user: [],
+    users: [],
     currBook: {
       title: `Murder on the Orient Express`,
       author: `Agatha Christie`,
@@ -81,7 +81,7 @@ const clubs = [
   {
     clubname: `High Fantasy Fan Club`,
     genre: `Fantasy`,
-    user: [],
+    users: [],
     currBook: {
       title: `The Fellowship of the Ring`,
       author: `J. R. R. Tolkien`,
