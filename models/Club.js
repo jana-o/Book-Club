@@ -5,9 +5,9 @@ const clubSchema = new Schema(
   {
     clubname: { type: String, unique: true },
     genre: String,
-    user: Array,
+    user: [{type: Schema.Types.ObjectId, ref: 'User'}],
     currBook: Object,
-    prevBooks: Array,
+    prevBooks: [{type: Object}],
     icon: String
   },
   {
