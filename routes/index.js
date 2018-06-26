@@ -60,18 +60,18 @@ router.get("/club/:id", ensureAuthenticated, (req, res, next) => {
   let clubId = req.params.id;
 
   Club.findOne({ _id: clubId }).
-    populate('user')
+    populate("users")
     .then(club => {
+      let memberStatus = false;
       // this checks whether the user is a member of the club, redirecting them to the logged in version if they are
-      // club.user.forEach((user) => {
-      //   if (user.username === req.user.username) {
-      //     console.log('user is a member of this club')
-      //     res.redirect(`/club/${club._id}/ismember=true`)
-      //   }
-      // })
-      // button action: push club membership, save to database, redirect to ismember=true  version
-      
-      res.render("club/clubProfile", { club });
+      club.users.forEach((elem) => {
+        console.log(elem)
+        if (elem.username === req.user.username) {
+          console.log('user is a member of this club')
+          memberStatus = true;
+        }
+      })      
+      res.render("club/clubProfile", { club, memberStatus });
     })
     .catch(error => {
       console.log(error);

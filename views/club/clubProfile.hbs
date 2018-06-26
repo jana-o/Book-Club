@@ -17,5 +17,12 @@
   <div class="video-container"></div>
 </div>
 
-<div class="club-btn"> <a class="btn btn-primary" id="join-club-btn" href="/club/{{club._id}}/join">Join Club</a> </div> 
+
+<div class="club-btn"> 
+  {{#if memberStatus}}
+    <a class="btn btn-primary" id="join-club-btn" href="/club/{{club._id}}">Leave Club</a> 
+  {{else}}
+    <a class="btn btn-primary" id="join-club-btn" href="/club/{{club._id}}/join">Join Club</a> 
+  {{/if}}
+</div> 
 
