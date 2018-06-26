@@ -7,8 +7,8 @@ const userSchema = new Schema(
     password: String,
     facebookID: String,
     email: { type: String, unique: true },
-    clubs: Array,
-    books: Array,
+    clubs: [{type: Schema.Types.ObjectId, ref: 'Club'}],
+    books: [{type: Object}],
     icon: String
   },
   {   

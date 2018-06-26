@@ -2,6 +2,9 @@ const express = require("express");
 const passport = require("passport");
 const router = express.Router();
 
+
+const mongoose = require("mongoose")
+
 const User = require("../models/User");
 const Club = require("../models/Club");
 
@@ -52,10 +55,34 @@ router.get("/browse", ensureAuthenticated, (req, res, next) => {
 /* GET Club*/
 router.get("/club/:id", ensureAuthenticated, (req, res, next) => {
   let clubId = req.params.id;
-  Club.findOne({ _id: clubId })
+
+  Club.findOne({ _id: clubId }).
+    populate('user')
     .then(club => {
-      console.log(club)
+      // this checks whether the user is a member of the club, redirecting them to the logged in version if they are
+      club.user.forEach((user) => {
+        if (user.username === req.user.username) {
+          console.log('user is a member of this club')
+          res.redirect(`/club/${club._id}/ismember=true`)
+        }
+      })
+      // button action: push club membership, save to database, redirect to ismember=true version
+      // $("#join-club-btn").click(() => {
+      //   console.log("click works")
+      // })
       res.render("club/clubProfile", { club });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+});
+
+router.get("/club/:id/ismember=true", ensureAuthenticated, (req, res, next) => {
+  let clubId = req.params.id;
+  Club.findOne({ _id: clubId }).
+    populate('user')
+    .then(club => {
+      res.render("club/clubProfile2", { club });
     })
     .catch(error => {
       console.log(error);
