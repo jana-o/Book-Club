@@ -81,4 +81,9 @@ footer {
   color: white;
   padding: 30px; }
 
+.cards-container {
+  display: flex;
+  padding: 10% 20%;
+  justify-content: space-around; }
+
 /*# sourceMappingURL=style.css.map */
