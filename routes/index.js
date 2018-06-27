@@ -1,6 +1,7 @@
 const express = require("express");
 const passport = require("passport");
 const router = express.Router();
+
 const mongoose = require("mongoose");
 
 const User = require("../models/User");
@@ -23,6 +24,7 @@ router.get("/", (req, res, next) => {
 
 /* GET home page */
 router.get("/home", ensureAuthenticated, (req, res, next) => {
+  console.log(req.user.username);
   res.render("home");
 });
 
@@ -126,6 +128,26 @@ router.get("/club/:id/leave", ensureAuthenticated, (req, res, next) => {
     })
     .catch(error => {
       console.log(error);
+    });
+});
+
+const axios = require("axios");
+const bookApi = axios.create({
+  baseURL: "https://www.googleapis.com/books/v1/"
+});
+//https://www.googleapis.com/books/v1/volumes?q=harry+potter
+//let title = response.data.volumes.items[0].volumeInfo.title;
+
+router.get("/books", (req, res, next) => {
+  bookApi
+    .get(`/volumes?q=${req.query.q}`)
+    .then(response => {
+      res.render("books", {
+        books: response.data.items
+      });
+    })
+    .catch(err => {
+      console.log("Something went wrong!", err);
     });
 });
 

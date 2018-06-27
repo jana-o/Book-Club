@@ -1,9 +1,8 @@
 <h1>Test Profile</h1>
 
-{{#if user}}
 <div class="row">
     <div class="col-6">
-        <img src="images/books2.png" alt="Profile">
+        <img src="/images/lisaicon.png">
     </div>
     <div class="col-6">
         <h3>Hi
@@ -11,11 +10,33 @@
         </h3>
     </div>
 </div>
+<div id="search">
+    <form id="myForm">
+        <div class="input-field">
+            <input type="search" id="books">
+            <label for="search">Search books</label>
+        </div>
+        <button class="btn btn-primary">Search</button>
+    </form>
+</div>
+
 <div>
     <h3>My favorite books</h3>
+    {{#each user}}
+    <ul>
+        <li>
+            {{this.books}}
+        </li>
+    </ul>
+    {{/each}}
 </div>
 <div>
     <h3>My book clubs</h3>
-
+    {{#each user}}
+    <ul>
+        <li>
+            {{this.clubs}}
+        </li>
+    </ul>
+    {{/each}}
 </div>
-{{/if}}
