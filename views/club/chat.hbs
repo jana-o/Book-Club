@@ -1,28 +1,19 @@
 <divclass="container">
-  <br>
   <div class="jumbotron">
-    <h1 class="dispaly-4">Start Chatting</h1>
+    <h1 class="dispaly-4"> {{club.clubname}}</h1>
     <br>
-    <div id="username">User: {{username}}</div>
+    <h3 class="dispaly-4">Start Chatting</h3>
+
+    <div id="username">Other users see you as: {{username}}</div>
+    <div>Be nice!</div>
     <br>
-    <textarea id="txtMessage" class="form-control" placeholder="Message"> </textarea>
-    <br>
-    <button id="send" class="btn btn-success">Send</button>
+    <form action="/send-email" method="post">
+    <div class="form-group">
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      <br>
+      <button id="send" type="submit" class="btn btn-primary">Send</button>
+    </div>
+    </form>
   </div>
   <div id="messages"></div>
   </div>
-  <script>
-    $(document).ready(function () {
-      $("send").click(() => {
-        let chatMessage = {
-          chat: $("#txtMessage").val()
-        }
-        console.log(chatMessage)
-        //postChat(chatMessage)
-      })
-    });
-
- //function postChat(chat) {
-     // console.log(chat)
-  //}
-  </script>

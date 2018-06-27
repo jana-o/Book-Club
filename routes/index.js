@@ -162,13 +162,10 @@ router.get("/club/:id/chat", ensureAuthenticated, (req, res, next) => {
       let memberStatus = false;
       // this checks whether the user is a member of the club, redirecting them to the logged in version if they are
       club.users.forEach(elem => {
-        console.log(elem);
         if (elem.username === req.user.username) {
-          console.log("user is a member of this club");
           memberStatus = true;
         }
       });
-      console.log (username)
       res.render("club/chat", { club, memberStatus, username });
     })
     .catch(error => {
