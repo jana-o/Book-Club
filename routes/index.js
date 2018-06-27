@@ -160,48 +160,13 @@ router.get("/save-book/:id", (req, res, next) => {
     .then(user => {
       user.books.push(bookId);
       user.save().then(updatedUser => {
-        console.log("Bokk added to User.bookds -->", updatedUser);
-        res.render("mylibrary");
+        //console.log("Book added to User.books -->", updatedUser);
+        res.render("mylibrary", { user });
       });
     })
     .catch(err => {
       throw err;
     });
 });
-
-// router.get("/save-book/:id", (req, res, next) => {
-//   //let clubId = req.params.id;
-//   //let userId = req.user._id;
-
-//   User.findById(userId)
-//     .then(books => {
-//       res.render("mylibrary", {
-//         books: response.data.items
-//       });
-//     })
-//     .catch(err => {
-//       console.log("Something went wrong!", err);
-//     });
-// });
-// router.get("/book/:id", (req, res, next) => {
-//   .then(response => {
-//     res.render("mylibrary", {
-//       books: response.data.items
-//     })
-//   })
-//   .catch(err => {
-//     console.log("Something went wrong!", err);
-//   });
-// });
-// router.get("/books/:id", (req, res, next) => {
-//     .then(response => {
-//       res.render("mylibrary", {
-//         title: response.data.items
-//       });
-//     })
-//     .catch(err => {
-//       console.log("Something went wrong!", err);
-//     });
-// });
 
 module.exports = router;
