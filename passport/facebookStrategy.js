@@ -22,7 +22,8 @@ passport.use(new FbStrategy({
     const newUser = new User({
       facebookID: profile.id,
       username: `${profile.name.givenName} ${profile.name.familyName}` ,
-      email: profile.emails[0].value
+      email: profile.emails[0].value,
+      confirmationStatus: 'confirmed'
     });
 
     newUser.save((err) => {

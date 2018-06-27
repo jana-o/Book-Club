@@ -1,8 +1,6 @@
 const express = require("express");
 const passport = require("passport");
 const router = express.Router();
-// const jsdom = require('jsdom')
-// const $ = require('jquery')(jsdom().parentWindow);
 
 
 
@@ -14,7 +12,7 @@ const Club = require("../models/Club");
 //Middleware//
 
 function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
+  if (req.isAuthenticated() && req.user.confirmationStatus === 'confirmed') {
     return next();
   } else {
     res.redirect("auth/login");
@@ -133,7 +131,7 @@ router.get("/club/:id/leave", ensureAuthenticated, (req, res, next) => {
     })
     .catch(error => {
       console.log(error);
-    });
+    }); 
 });
 
 module.exports = router;

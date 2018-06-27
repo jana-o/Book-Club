@@ -4,6 +4,8 @@ const express = require("express");
 const passport = require("passport");
 const authRoutes = express.Router();
 const User = require("../models/User");
+const nodemailer = require("nodemailer")
+const mongoose = require("mongoose")
 
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
@@ -53,6 +55,7 @@ authRoutes.post("/signup", (req, res, next) => {
     email
   });
 
+
   newUser.save(err => {
     if (err) {
       res.render("auth/signup", { message: "Something went wrong" });
@@ -60,7 +63,38 @@ authRoutes.post("/signup", (req, res, next) => {
       res.redirect("/home");
     }
   });
+
+  // sending user a confirmation link to activate their account - this might have to be in a .then
+  let transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_PW
+    }
+  });
+  transporter.sendMail({
+    from: '"Readerly" <nahom.delfino@gmail.com>',
+    to: email, 
+    subject: "Welcome to Readerly! Account Confirmation Link", 
+    text: `Welcome to Readerly, the newest micro book-club platform! Please follow this link to confirm your registration and start using the platform: http://localhost:3000/auth/confirm/${hashPass}. We look forward to seeing you soon!`,
+    html: `<b>Welcome to Readerly, the newest micro book-club platform! Please follow this link to confirm your registration and start using the platform: <a href="http://localhost:3000/auth/confirm/${hashPass}">Account Confirmation Link</a>. We look forward to seeing you soon!</b>`
+  })
+  .catch(error => console.log(error));
 });
+
+authRoutes.get("/confirm/:hashpass", (req, res, next) => {
+  let hashpass = req.params.hashpass
+  let query = {password: hashpass}
+
+  User.findOneAndUpdate(query, {confirmationStatus: "confirmed"})
+  .then (() => {
+    res.redirect("/");
+  })
+  .catch(err => {
+    throw err;
+  })
+})
+
 
 /// facebook login routes
 authRoutes.get(
