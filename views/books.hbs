@@ -1,0 +1,13 @@
+<div class="container">
+    <form method="get">
+        <input type="text" name="q" placeholder="Book name">
+        <button type="submit">Search</button>
+    </form>
+    <div class="row">
+        {{#each books}}
+        <div class="col-lg-4">
+            <p>{{this.volumeInfo.title}}</p>
+        </div>
+    </div>
+    {{/each}}
+</div>

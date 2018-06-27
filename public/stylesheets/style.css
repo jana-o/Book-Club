@@ -6311,10 +6311,20 @@ footer {
   background-color: #e3e3e3;
   color: #3d3b3b; }
 
+.footer-container {
+  max-width: 59rem;
+  margin: 0 auto; }
+
 .footer-copyright {
   color: #616161;
   font-size: 0.8125rem;
   line-height: 1.625rem;
+  display: inline;
+  margin: 0;
+  padding: 0;
+  text-decoration: none; }
+
+.footer-copyright-right {
   display: inline;
   margin: 0;
   padding: 0;
@@ -6331,10 +6341,21 @@ footer {
   margin-left: 0.46875rem;
   margin-right: 0.46875rem; }
 
+.footer-copyright-right li {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  text-align: end; }
+
 .footer-separator--thin {
   height: 0.0625 rem;
   background: black;
   border: 0; }
+
+.stores img {
+  width: 50%;
+  float: right; }
 
 .headerPic {
   background-image: url(../images/Tianjin-Binhai.jpg);
@@ -6345,6 +6366,9 @@ footer {
   height: 60vh;
   width: 100vw;
   position: relative; }
+
+.header-container {
+  top: 50%; }
 
 @media (max-width: 600px) {
   footer {
