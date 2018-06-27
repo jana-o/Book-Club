@@ -1,8 +1,6 @@
 const express = require("express");
 const passport = require("passport");
 const router = express.Router();
-// const jsdom = require('jsdom')
-// const $ = require('jquery')(jsdom().parentWindow);
 
 const mongoose = require("mongoose");
 
@@ -12,7 +10,7 @@ const Club = require("../models/Club");
 //Middleware//
 
 function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
+  if (req.isAuthenticated() && req.user.confirmationStatus === "confirmed") {
     return next();
   } else {
     res.redirect("auth/login");
@@ -83,9 +81,12 @@ router.get("/club/:id/join", ensureAuthenticated, (req, res, next) => {
 
   Club.findById(clubId)
     .then(club => {
+      // if user is a member, redirect away from the join route to the default club page (prevents multiple registrations)
       if (club.users.map(id => id.toString()).includes(userId)) {
         res.redirect(`/club/${club._id}`);
-      } else {
+      }
+      // if not already a member, push the user id onto the club member array, pust the club id onto the user's membership array, redirect to default club page
+      else {
         club.users.push(userId);
         club.save().then(() => {
           User.findByIdAndUpdate(userId, { $push: { clubs: clubId } }).then(
@@ -93,6 +94,35 @@ router.get("/club/:id/join", ensureAuthenticated, (req, res, next) => {
               res.redirect(`/club/${club._id}`);
             }
           );
+        });
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+});
+router.get("/club/:id/leave", ensureAuthenticated, (req, res, next) => {
+  let clubId = req.params.id;
+  let userId = req.user._id.toString();
+
+  Club.findById(clubId)
+    .then(club => {
+      // if not a member of the club (don't know how you'd access this if you aren't a member, but just in case), this will redirect to default join club view
+      if (!club.users.map(id => id.toString()).includes(userId)) {
+        res.redirect(`/club/${club._id}`);
+      }
+      // else if you are a member (expected), find and remove from each of the club and user arrays + redirect
+      else {
+        club.users.splice(club.users.indexOf(userId), 1);
+        club.save().then(() => {
+          User.findById(userId)
+            .then(user => {
+              user.clubs.splice(user.clubs.indexOf(clubId), 1);
+              user.save();
+            })
+            .then(() => {
+              res.redirect(`/club/${club._id}`);
+            });
         });
       }
     })

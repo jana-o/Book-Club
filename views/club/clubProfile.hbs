@@ -20,9 +20,10 @@
 
 <div class="club-btn"> 
   {{#if memberStatus}}
-    <a class="btn btn-primary" id="join-club-btn" href="/club/{{club._id}}">Leave Club</a> 
+    <a class="btn btn-primary club-btn" href="/club/{{club._id}}/chat">Club Chat</a> 
+    <a class="btn btn-primary club-btn" href="/club/{{club._id}}/leave">Leave Club</a> 
   {{else}}
-    <a class="btn btn-primary" id="join-club-btn" href="/club/{{club._id}}/join">Join Club</a> 
+    <a class="btn btn-primary club-btn" href="/club/{{club._id}}/join">Join Club</a> 
   {{/if}}
 </div> 
 

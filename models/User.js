@@ -9,7 +9,8 @@ const userSchema = new Schema(
     email: { type: String, unique: true },
     clubs: [{type: Schema.Types.ObjectId, ref: 'Club'}],
     books: [{type: Object}],
-    icon: String
+    icon: String,
+    confirmationStatus: {type: String, default: "awaiting"}
   },
   {   
     timestamps: {
