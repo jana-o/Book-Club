@@ -1,10 +1,7 @@
 const express = require("express");
 const passport = require("passport");
 const router = express.Router();
-
-
-
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
 const User = require("../models/User");
 const Club = require("../models/Club");
@@ -12,7 +9,7 @@ const Club = require("../models/Club");
 //Middleware//
 
 function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated() && req.user.confirmationStatus === 'confirmed') {
+  if (req.isAuthenticated() && req.user.confirmationStatus === "confirmed") {
     return next();
   } else {
     res.redirect("auth/login");
@@ -57,18 +54,18 @@ router.get("/browse", ensureAuthenticated, (req, res, next) => {
 router.get("/club/:id", ensureAuthenticated, (req, res, next) => {
   let clubId = req.params.id;
 
-  Club.findOne({ _id: clubId }).
-    populate("users")
+  Club.findOne({ _id: clubId })
+    .populate("users")
     .then(club => {
       let memberStatus = false;
       // this checks whether the user is a member of the club, redirecting them to the logged in version if they are
-      club.users.forEach((elem) => {
-        console.log(elem)
+      club.users.forEach(elem => {
+        console.log(elem);
         if (elem.username === req.user.username) {
-          console.log('user is a member of this club')
+          console.log("user is a member of this club");
           memberStatus = true;
         }
-      })      
+      });
       res.render("club/clubProfile", { club, memberStatus });
     })
     .catch(error => {
@@ -78,7 +75,7 @@ router.get("/club/:id", ensureAuthenticated, (req, res, next) => {
 
 router.get("/club/:id/join", ensureAuthenticated, (req, res, next) => {
   let clubId = req.params.id;
-  let userId = req.user._id.toString()
+  let userId = req.user._id.toString();
 
   Club.findById(clubId)
     .then(club => {
@@ -88,16 +85,15 @@ router.get("/club/:id/join", ensureAuthenticated, (req, res, next) => {
       }
       // if not already a member, push the user id onto the club member array, pust the club id onto the user's membership array, redirect to default club page
       else {
-        club.users.push(userId)
-        club.save()
-        .then(()=> {
-          User.findByIdAndUpdate(userId, { $push: { clubs: clubId } })
-          .then(()=> {
-            res.redirect(`/club/${club._id}`);
-          })
-        })
+        club.users.push(userId);
+        club.save().then(() => {
+          User.findByIdAndUpdate(userId, { $push: { clubs: clubId } }).then(
+            () => {
+              res.redirect(`/club/${club._id}`);
+            }
+          );
+        });
       }
-      
     })
     .catch(error => {
       console.log(error);
@@ -105,7 +101,7 @@ router.get("/club/:id/join", ensureAuthenticated, (req, res, next) => {
 });
 router.get("/club/:id/leave", ensureAuthenticated, (req, res, next) => {
   let clubId = req.params.id;
-  let userId = req.user._id.toString()
+  let userId = req.user._id.toString();
 
   Club.findById(clubId)
     .then(club => {
@@ -115,23 +111,48 @@ router.get("/club/:id/leave", ensureAuthenticated, (req, res, next) => {
       }
       // else if you are a member (expected), find and remove from each of the club and user arrays + redirect
       else {
-        club.users.splice(club.users.indexOf(userId), 1)
-        club.save()
-        .then(()=> {
+        club.users.splice(club.users.indexOf(userId), 1);
+        club.save().then(() => {
           User.findById(userId)
-          .then (user => {
-            user.clubs.splice(user.clubs.indexOf(clubId), 1)
-            user.save()
-          })
-          .then(()=> { 
-            res.redirect(`/club/${club._id}`);
-          })
-        })
+            .then(user => {
+              user.clubs.splice(user.clubs.indexOf(clubId), 1);
+              user.save();
+            })
+            .then(() => {
+              res.redirect(`/club/${club._id}`);
+            });
+        });
       }
     })
     .catch(error => {
       console.log(error);
-    }); 
+    });
 });
+
+// chat route
+router.get("/club/:id/chat", ensureAuthenticated, (req, res, next) => {
+  let clubId = req.params.id;
+  let username = req.user.username
+
+  Club.findOne({ _id: clubId })
+    .populate("users")
+    .then(club => {
+      let memberStatus = false;
+      // this checks whether the user is a member of the club, redirecting them to the logged in version if they are
+      club.users.forEach(elem => {
+        console.log(elem);
+        if (elem.username === req.user.username) {
+          console.log("user is a member of this club");
+          memberStatus = true;
+        }
+      });
+      console.log (username)
+      res.render("club/chat", { club, memberStatus, username });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+});
+
 
 module.exports = router;

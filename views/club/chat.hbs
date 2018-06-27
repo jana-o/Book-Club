@@ -1,0 +1,28 @@
+<divclass="container">
+  <br>
+  <div class="jumbotron">
+    <h1 class="dispaly-4">Start Chatting</h1>
+    <br>
+    <div id="username">User: {{username}}</div>
+    <br>
+    <textarea id="txtMessage" class="form-control" placeholder="Message"> </textarea>
+    <br>
+    <button id="send" class="btn btn-success">Send</button>
+  </div>
+  <div id="messages"></div>
+  </div>
+  <script>
+    $(document).ready(function () {
+      $("send").click(() => {
+        let chatMessage = {
+          chat: $("#txtMessage").val()
+        }
+        console.log(chatMessage)
+        //postChat(chatMessage)
+      })
+    });
+
+ //function postChat(chat) {
+     // console.log(chat)
+  //}
+  </script>
