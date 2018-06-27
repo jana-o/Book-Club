@@ -22,7 +22,7 @@ const clubs = [
         ISBN: 9781627938204
       }
     ],
-    icon: `/images/books.png`
+    icon: `images/books.png`
   },
   {
     clubname: `Self-Improvement Club`,
@@ -40,7 +40,7 @@ const clubs = [
         ISBN: 9781409005216
       }
     ],
-    icon: `/images/books2.png`
+    icon: `images/books2.png`
   },
   {
     clubname: `Popular Economics`,
@@ -58,7 +58,7 @@ const clubs = [
         ISBN: 9780141918921
       }
     ],
-    icon: `/images/books.png`
+    icon: `images/books.png`
   },
   {
     clubname: `Crime/ Mystery Club`,
@@ -76,7 +76,7 @@ const clubs = [
         ISBN: 9780394758282
       }
     ],
-    icon: `/images/books2.png`
+    icon: `images/books2.png`
   },
   {
     clubname: `High Fantasy Fan Club`,
@@ -94,7 +94,7 @@ const clubs = [
         ISBN: 9781473208452
       }
     ],
-    icon: `/images/books2.png`
+    icon: `images/books2.png`
   }
 ];
 
