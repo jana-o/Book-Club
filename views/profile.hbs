@@ -32,11 +32,9 @@
 </div>
 <div>
     <h3>My book clubs</h3>
-    {{#each user}}
-    <ul>
+    <ul> {{#each user.clubs}}
         <li>
-            {{this.clubs}}
+            {{this}}
         </li>
-    </ul>
-    {{/each}}
+    </ul>{{/each}}
 </div>

@@ -137,6 +137,7 @@ const bookApi = axios.create({
 });
 //https://www.googleapis.com/books/v1/volumes?q=harry+potter
 //let title = response.data.volumes.items[0].volumeInfo.title;
+//ensureAuthenticated, !!!!
 
 router.get("/books", (req, res, next) => {
   bookApi
@@ -150,5 +151,57 @@ router.get("/books", (req, res, next) => {
       console.log("Something went wrong!", err);
     });
 });
+
+router.get("/save-book/:id", (req, res, next) => {
+  let bookId = req.params.id;
+  let userId = req.user._id;
+
+  User.findById(userId)
+    .then(user => {
+      user.books.push(bookId);
+      user.save().then(updatedUser => {
+        console.log("Bokk added to User.bookds -->", updatedUser);
+        res.render("mylibrary");
+      });
+    })
+    .catch(err => {
+      throw err;
+    });
+});
+
+// router.get("/save-book/:id", (req, res, next) => {
+//   //let clubId = req.params.id;
+//   //let userId = req.user._id;
+
+//   User.findById(userId)
+//     .then(books => {
+//       res.render("mylibrary", {
+//         books: response.data.items
+//       });
+//     })
+//     .catch(err => {
+//       console.log("Something went wrong!", err);
+//     });
+// });
+// router.get("/book/:id", (req, res, next) => {
+//   .then(response => {
+//     res.render("mylibrary", {
+//       books: response.data.items
+//     })
+//   })
+//   .catch(err => {
+//     console.log("Something went wrong!", err);
+//   });
+// });
+// router.get("/books/:id", (req, res, next) => {
+//     .then(response => {
+//       res.render("mylibrary", {
+//         title: response.data.items
+//       });
+//     })
+//     .catch(err => {
+//       console.log("Something went wrong!", err);
+//     });
+// });
 
 module.exports = router;

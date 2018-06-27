@@ -7,16 +7,17 @@ const userSchema = new Schema(
     password: String,
     facebookID: String,
     email: { type: String, unique: true },
-    clubs: [{type: Schema.Types.ObjectId, ref: 'Club'}],
-    books: [{type: Object}],
+    clubs: [{ type: Schema.Types.ObjectId, ref: "Club" }],
+    books: [{ type: String }],
     icon: String,
-    confirmationStatus: {type: String, default: "awaiting"}
+    confirmationStatus: { type: String, default: "awaiting" }
   },
-  {   
+  {
     timestamps: {
       createdAt: "created_at",
       updatedAt: "updated_at"
-    }
+    },
+    usePushEach: true
   }
 );
 

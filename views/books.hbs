@@ -6,7 +6,10 @@
     <div class="row">
         {{#each books}}
         <div class="col-lg-4">
-            <p>{{this.volumeInfo.title}}</p>
+            <p>
+                {{this.volumeInfo.title}}
+                <a href='/save-book/{{this.id}}' class='btn btn-success btn-sm'>Save</a>
+            </p>
         </div>
     </div>
     {{/each}}
