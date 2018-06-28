@@ -6,8 +6,9 @@ const mongoose = require("mongoose");
 
 const User = require("../models/User");
 const Club = require("../models/Club");
+const Book = require("../models/Book");
 
-//Middleware//
+//Middleware;
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated() && req.user.confirmationStatus === "confirmed") {
@@ -15,6 +16,17 @@ function ensureAuthenticated(req, res, next) {
   } else {
     res.redirect("auth/login");
   }
+}
+
+//Middleware Role
+function checkRoles(role) {
+  return function(req, res, next) {
+    if (req.user.role === role) {
+      return next();
+    } else {
+      res.redirect("/");
+    }
+  };
 }
 
 /* GET home page */
@@ -27,6 +39,15 @@ router.get("/home", ensureAuthenticated, (req, res, next) => {
   console.log(req.user.username);
   res.render("home");
 });
+
+//
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated() && req.user.confirmationStatus === "confirmed") {
+    return next();
+  } else {
+    res.redirect("auth/login");
+  }
+}
 
 /* GET Profile*/
 router.get("/user/:id", ensureAuthenticated, (req, res, next) => {
@@ -128,44 +149,6 @@ router.get("/club/:id/leave", ensureAuthenticated, (req, res, next) => {
     })
     .catch(error => {
       console.log(error);
-    });
-});
-
-const axios = require("axios");
-const bookApi = axios.create({
-  baseURL: "https://www.googleapis.com/books/v1/"
-});
-//https://www.googleapis.com/books/v1/volumes?q=harry+potter
-//let title = response.data.volumes.items[0].volumeInfo.title;
-//ensureAuthenticated, !!!!
-
-router.get("/books", (req, res, next) => {
-  bookApi
-    .get(`/volumes?q=${req.query.q}`)
-    .then(response => {
-      res.render("books", {
-        books: response.data.items
-      });
-    })
-    .catch(err => {
-      console.log("Something went wrong!", err);
-    });
-});
-
-router.get("/save-book/:id", (req, res, next) => {
-  let bookId = req.params.id;
-  let userId = req.user._id;
-
-  User.findById(userId)
-    .then(user => {
-      user.books.push(bookId);
-      user.save().then(updatedUser => {
-        //console.log("Book added to User.books -->", updatedUser);
-        res.render("mylibrary", { user });
-      });
-    })
-    .catch(err => {
-      throw err;
     });
 });
 

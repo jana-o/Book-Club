@@ -66,6 +66,7 @@ hbs.registerHelper("ifUndefined", (value, options) => {
 });
 
 // default value for title local
+
 app.locals.title = "Readerly";
 
 // Enable authentication using session + passport
@@ -85,5 +86,8 @@ app.use("/", index);
 
 const authRoutes = require("./routes/auth");
 app.use("/auth", authRoutes);
+
+const books = require("./routes/books");
+app.use("/books", books);
 
 module.exports = app;

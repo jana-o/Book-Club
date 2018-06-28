@@ -107,21 +107,6 @@ authRoutes.get(
     failureRedirect: "/login"
   })
 );
-//// google login routes
-authRoutes.get(
-  "/google",
-  passport.authenticate("google", {
-    scope: ["https://www.googleapis.com/auth/plus.login"]
-  })
-);
-
-authRoutes.get(
-  "/google/callback",
-  passport.authenticate("google", { failureRedirect: "/login" }),
-  function(req, res) {
-    res.redirect("/");
-  }
-);
 
 /// login routes
 authRoutes.get("/login", (req, res, next) => {
@@ -131,7 +116,7 @@ authRoutes.get("/login", (req, res, next) => {
 authRoutes.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/home",
+    successRedirect: `/home`,
     failureRedirect: "/auth/login",
     failureFlash: true,
     passReqToCallback: true

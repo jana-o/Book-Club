@@ -8,8 +8,9 @@ const userSchema = new Schema(
     facebookID: String,
     email: { type: String, unique: true },
     clubs: [{ type: Schema.Types.ObjectId, ref: "Club" }],
-    books: [{ type: String }],
+    books: [{ type: Schema.Types.ObjectId, ref: "Book" }],
     icon: String,
+    role: { type: String, enum: ["admin", "normal"], default: "normal" },
     confirmationStatus: { type: String, default: "awaiting" }
   },
   {

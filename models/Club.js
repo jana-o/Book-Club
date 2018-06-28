@@ -6,8 +6,7 @@ const clubSchema = new Schema(
     clubname: { type: String, unique: true },
     genre: String,
     users: [{ type: Schema.Types.ObjectId, ref: "User" }],
-    currBook: Object,
-    prevBooks: [{ type: Schema.Types.Mixed }],
+    books: [{ type: Schema.Types.ObjectId, ref: "Book" }],
     icon: String
   },
   {
