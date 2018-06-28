@@ -19,35 +19,18 @@ function ensureAuthenticated(req, res, next) {
 }
 
 //Middleware Role
-function checkRoles(role) {
-  return function(req, res, next) {
-    if (req.user.role === role) {
-      return next();
-    } else {
-      res.redirect("/");
-    }
-  };
-}
 
-/* GET home page */
+
+/* GET INDEX page */
 router.get("/", (req, res, next) => {
-  res.render("index");
+  res.render("index", {req});
 });
 
 /* GET home page */
 router.get("/home", ensureAuthenticated, (req, res, next) => {
-  console.log(req.user.username);
-  res.render("home");
+  res.render("home", {req});
 });
 
-//
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated() && req.user.confirmationStatus === "confirmed") {
-    return next();
-  } else {
-    res.redirect("auth/login");
-  }
-}
 
 /* GET Profile*/
 router.get("/user/:id", ensureAuthenticated, (req, res, next) => {
@@ -55,7 +38,7 @@ router.get("/user/:id", ensureAuthenticated, (req, res, next) => {
   console.log(userId);
   User.findOne({ _id: userId })
     .then(user => {
-      res.render("profile", { user });
+      res.render("profile", { user, req });
     })
     .catch(error => {
       console.log(error);
@@ -67,7 +50,7 @@ router.get("/browse", ensureAuthenticated, (req, res, next) => {
   Club.find()
     .populate("books")
     .then(club => {
-      res.render("club/browse", { club });
+      res.render("club/browse", { club, req });
     })
     .catch(error => {
       console.log(error);
@@ -90,7 +73,7 @@ router.get("/club/:id", ensureAuthenticated, (req, res, next) => {
           memberStatus = true;
         }
       });
-      res.render("club/clubProfile", { club, memberStatus });
+      res.render("club/clubProfile", { club, memberStatus, req });
     })
     .catch(error => {
       console.log(error);

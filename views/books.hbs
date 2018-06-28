@@ -8,7 +8,7 @@
         <div class="col-lg-4">
             <p>
                 {{this.volumeInfo.title}}
-                <a href='/books/{{this.id}}/new-favorite' class='btn btn-success btn-sm'>Save</a>
+                <a href='/books/{{this.id}}+{{this.volumeInfo.authors.[0]}}+{{this.volumeInfo.title}}/new-favorite' class='btn btn-success btn-sm'>Save</a>
             </p>
         </div>
     </div>
