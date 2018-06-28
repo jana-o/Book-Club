@@ -65,6 +65,7 @@ router.get("/user/:id", ensureAuthenticated, (req, res, next) => {
 /* GET Browse*/
 router.get("/browse", ensureAuthenticated, (req, res, next) => {
   Club.find()
+    .populate("books")
     .then(club => {
       res.render("club/browse", { club });
     })

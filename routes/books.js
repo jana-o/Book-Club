@@ -15,30 +15,30 @@ const bookApi = axios.create({
 
 //ensureAuthenticated, !!!!
 
-router.get("/books", (req, res, next) => {
-  res.render("books");
-});
-
 // router.get("/books", (req, res, next) => {
-//   bookApi
-//     .get(`/volumes?q=${req.query.q}`)
-//     .then(response => {
-//       res.render("books", {
-//         books: response.data.items
-//       });
-//     })
-//     .catch(err => {
-//       console.log("Something went wrong!", err);
-//     });
+//   res.render("books");
 // });
 
-router.get("/save-book/:id", (req, res, next) => {
+router.get("/", (req, res, next) => {
+  bookApi
+    .get(`/volumes?q=${req.query.q}`)
+    .then(response => {
+      res.render("books", {
+        books: response.data.items
+      });
+    })
+    .catch(err => {
+      console.log("Something went wrong!", err);
+    });
+});
+
+router.get("/:googleId/new-favorite", (req, res, next) => {
   let bookId = req.params.id;
   let userId = req.user._id;
 
   User.findById(userId)
     .then(user => {
-      user.books.push(bookId);
+      user.favoriteBooks.push(bookId);
       user.save().then(updatedUser => {
         //console.log("Book added to User.books -->", updatedUser);
         res.render("mylibrary", { user });

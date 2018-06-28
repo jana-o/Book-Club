@@ -6,7 +6,9 @@
                 <h5 class="card-title">{{this.clubname}}</h5>
             </a>
             <p class="card-title">
-                <strong>Current book: </strong>{{this.currBook.title}}</p>
+                <strong>Current book: </strong>
+                {{#each this.books}} {{#if @last}} {{this.title}} {{/if}} {{/each}}
+            </p>
             <p class="card-title">
                 <strong>Author: </strong>{{this.currBook.author}}</p>
 
