@@ -28,17 +28,24 @@ function ensureAuthenticated(req, res, next) {
 }
 
 router.get("/", ensureAuthenticated, (req, res, next) => {
-  bookApi
+  if (!req.query.q) {
+    res.render("books", {req});
+  }
+
+  else if (req.query.q){
+    bookApi
     .get(`/volumes?q=${req.query.q}`)
     .then(response => {
       // console.log(response.data.items.authors)
       res.render("books", {
-        books: response.data.items, req
+        books: response.data.items, req, 
       });
     })
     .catch(err => {
       console.log("Something went wrong!", err);
     });
+  }
+  
 });
 
 router.get("/:metadata/new-favorite", ensureAuthenticated, (req, res, next) => {

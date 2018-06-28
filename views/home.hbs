@@ -6,30 +6,34 @@
     </div>
     <div class="col-6">
         <h3>Hi
-            <span>{{ user.username}}</span> !
+            <span>{{ req.user.username }}</span> !
         </h3>
     </div>
 </div>
+<br>
 <div id="search">
     <a href="/books" class="btn btn-primary">Search</a>
     </form>
 </div>
+<br>
 
 <div>
     <h3>My favorite books</h3>
-    {{#each user}}
     <ul>
+        {{#each user.favoriteBooks}}
         <li>
-            {{this.books}}
+            {{this.title}} by {{this.author}}
         </li>
+        {{/each}}
     </ul>
-    {{/each}}
 </div>
 <div>
     <h3>My book clubs</h3>
-    <ul> {{#each user.clubs}}
+    <ul> 
+    {{#each user.clubs}}
         <li>
-            {{this}}
+            {{this.clubname}}
         </li>
-    </ul>{{/each}}
+    {{/each}}   
+    </ul>
 </div>

@@ -18,8 +18,6 @@ function ensureAuthenticated(req, res, next) {
   }
 }
 
-//Middleware Role
-
 
 /* GET INDEX page */
 router.get("/", (req, res, next) => {
@@ -28,7 +26,13 @@ router.get("/", (req, res, next) => {
 
 /* GET home page */
 router.get("/home", ensureAuthenticated, (req, res, next) => {
-  res.render("home", {req});
+  User.findById(req.user._id)
+  .populate("favoriteBooks")
+  .populate("clubs")
+  .then((user) =>{
+    console.log(user)
+    res.render("home", {req, user});
+  })
 });
 
 

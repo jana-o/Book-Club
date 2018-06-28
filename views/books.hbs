@@ -1,4 +1,10 @@
 <div class="container">
+    
+    {{#if req.query.q}}
+    <h3>Results:</h3>
+    {{else}}
+    <h3>Enter the name of a book you want to favourite!</h3>
+    {{/if}}
     <form method="get">
         <input type="text" name="q" placeholder="Book name">
         <button type="submit">Search</button>
