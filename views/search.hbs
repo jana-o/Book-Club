@@ -1,0 +1,16 @@
+<div class="container">
+    <form method="get">
+        <input type="text" name="q" placeholder="Book name">
+        <button type="submit">Search</button>
+    </form>
+    <div class="row">
+        {{#each books}}
+        <div class="col-lg-4">
+            <p>
+                {{this.volumeInfo.title}}
+                <a href='/books/{{this.id}}/new-favorite' class='btn btn-success btn-sm'>Save</a>
+            </p>
+        </div>
+    </div>
+    {{/each}}
+</div>

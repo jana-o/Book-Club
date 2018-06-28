@@ -32,6 +32,19 @@ router.get("/", (req, res, next) => {
     });
 });
 
+router.get("/search", (req, res, next) => {
+  bookApi
+    .get(`/volumes?q=${req.query.q}`)
+    .then(response => {
+      res.render("search", {
+        books: response.data.items
+      });
+    })
+    .catch(err => {
+      console.log("Something went wrong!", err);
+    });
+});
+
 router.get("/:googleId/new-favorite", (req, res, next) => {
   let bookId = req.params.id;
   let userId = req.user._id;
