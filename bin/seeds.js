@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Club = require("../models/Club");
 
 const dbName = "project-2---book-club";
-mongoose.connect(`mongodb://localhost/${dbName}`);
+mongoose.connect(process.env.MONGODB_URI);
 Club.collection.drop();
 
 const clubs = [

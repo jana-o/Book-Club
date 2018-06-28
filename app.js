@@ -16,7 +16,9 @@ const flash = require("connect-flash");
 mongoose.Promise = Promise;
 mongoose
   .connect(
-    "mongodb://localhost/project-2---book-club",
+    // "mongodb://heroku_hmpvp5bz:l43rq72j7cln5eqcgtc3aeptqj@ds121251.mlab.com:21251/heroku_hmpvp5bz"
+    process.env.MONGODB_URI
+    ,
     { useMongoClient: true }
   )
   .then(() => {
