@@ -9,8 +9,8 @@
     </div>
     <br>
 
-
-    <div>
+<div class="row">
+    <div class="col-6">
         <h3>{{ user.username }}'s favorite books</h3>
         {{!-- {{user.favoriteBooks}} --}}
         <ul style="list-style-type:none">
@@ -22,14 +22,15 @@
             {{/each}}
         </ul>
     </div>
-    <div>
+    <div class="col-6">
         <h3>{{ user.username }}'s book clubs</h3>
         {{!-- {{user.clubs}} --}}
         <ul style="list-style-type:none">
             {{#each user.clubs}}
             <li>
-                <a href="club/{{this._id}}">{{this.clubname}}</a>
+                <a href="../club/{{this._id}}">{{this.clubname}}</a>
             </li>
             {{/each}}
         </ul>
     </div>
+ </div>   

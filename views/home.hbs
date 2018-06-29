@@ -14,8 +14,8 @@
         </form>
     </div>
     <br>
-
-    <div>
+    <div class="row">
+    <div class="col-6">
         <h3>My favorite books</h3>
         <ul style="list-style-type:none">
             {{#each user.favoriteBooks}}
@@ -26,7 +26,7 @@
             {{/each}}
         </ul>
     </div>
-    <div>
+    <div class="col-6">
         <h3>My book clubs</h3>
         <ul style="list-style-type:none">
             {{#each user.clubs}}
@@ -35,5 +35,6 @@
             </li>
             {{/each}}
         </ul>
+    </div>
     </div>
 </div>
