@@ -7,7 +7,7 @@ const User          = require('../models/User');
 passport.use(new FbStrategy({
   clientID: process.env.CLIENT_ID,
   clientSecret: process.env.CLIENT_SECRET,
-  callbackURL: "/auth/facebook/callback",
+  callbackURL: "https://readerly-project.herokuapp.com/auth/facebook/callback",
   profileFields: ['id', 'emails', 'name']
 }, (accessToken, refreshToken, profile, done) => {
   User.findOne({ facebookID: profile.id }, (err, user) => {

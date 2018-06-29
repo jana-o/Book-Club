@@ -76,8 +76,8 @@ authRoutes.post("/signup", (req, res, next) => {
       from: '"Readerly" <nahom.delfino@gmail.com>',
       to: email,
       subject: "Welcome to Readerly! Account Confirmation Link",
-      text: `Welcome to Readerly, the newest micro book-club platform! Please follow this link to confirm your registration and start using the platform: http://localhost:3000/auth/confirm/${hashPass}. We look forward to seeing you soon!`,
-      html: `<b>Welcome to Readerly, the newest micro book-club platform! Please follow this link to confirm your registration and start using the platform: <a href="http://localhost:3000/auth/confirm/${hashPass}">Account Confirmation Link</a>. We look forward to seeing you soon!</b>`
+      text: `Welcome to Readerly, the newest micro book-club platform! Please follow this link to confirm your registration and start using the platform: https://readerly-project.herokuapp.com/auth/confirm/${hashPass}. We look forward to seeing you soon!`,
+      html: `<b>Welcome to Readerly, the newest micro book-club platform! Please follow this link to confirm your registration and start using the platform: <a href="https://readerly-project.herokuapp.com/auth/confirm/${hashPass}">Account Confirmation Link</a>. We look forward to seeing you soon!</b>`
     })
     .catch(error => console.log(error));
 });
