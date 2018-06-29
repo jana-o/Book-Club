@@ -18,23 +18,20 @@ function ensureAuthenticated(req, res, next) {
   }
 }
 
-
 /* GET INDEX page */
 router.get("/", (req, res, next) => {
-  res.render("index", {req});
+  res.render("index", { req });
 });
 
 /* GET home page */
 router.get("/home", ensureAuthenticated, (req, res, next) => {
   User.findById(req.user._id)
-  .populate("favoriteBooks")
-  .populate("clubs")
-  .then((user) =>{
-    console.log(user)
-    res.render("home", {req, user});
-  })
+    .populate("favoriteBooks")
+    .populate("clubs")
+    .then(user => {
+      res.render("home", { req, user });
+    });
 });
-
 
 /* GET Profile*/
 router.get("/user/:id", ensureAuthenticated, (req, res, next) => {
@@ -65,19 +62,21 @@ router.get("/browse", ensureAuthenticated, (req, res, next) => {
 router.get("/club/:id", ensureAuthenticated, (req, res, next) => {
   let clubId = req.params.id;
 
-  Club.findOne({ _id: clubId })
-    .populate("users")
+  Club.findById(clubId)
+  // TO DO!
+  // populate users works great, populate books doesn't work
+    .populate("users", "books")
     .then(club => {
       let memberStatus = false;
       // this checks whether the user is a member of the club, redirecting them to the logged in version if they are
       club.users.forEach(elem => {
-        console.log(elem);
         if (elem.username === req.user.username) {
-          console.log("user is a member of this club");
           memberStatus = true;
         }
       });
-      res.render("club/clubProfile", { club, memberStatus, req });
+      // I want ot search for the following book, then populate the page with its info! 
+      // console.log("club.books: ",club.books[club.books.length - 1])
+        res.render("club/clubProfile", { club, memberStatus, req });
     })
     .catch(error => {
       console.log(error);

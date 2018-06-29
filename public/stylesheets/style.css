@@ -6393,7 +6393,7 @@ footer {
 
 .club-content {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   background-color: lightgrey;
   margin-top: 5px;
   padding: 5px;
@@ -6417,7 +6417,7 @@ footer {
   background-color: beige;
   margin: 3px; }
 
-.container > .btn-danger {
+.container > .btn-primary {
   margin-top: 5px; }
 
 .club-btn {
@@ -6428,5 +6428,12 @@ footer {
 .card-img-top {
   width: 90%;
   padding: 0.8em; }
+
+.search-img {
+  width: 12vw; }
+
+.no-margin-left {
+  padding-left: 0 !important;
+  margin-left: 0 !important; }
 
 /*# sourceMappingURL=style.css.map */

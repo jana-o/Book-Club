@@ -1,39 +1,39 @@
-<h1>HOME</h1>
+<div class="container">
 
-<div class="row">
-    <div class="col-6">
-        <img src="/images/lisaicon.png">
-    </div>
-    <div class="col-6">
-        <h3>Hi
-            <span>{{ req.user.username }}</span> !
-        </h3>
-    </div>
-</div>
-<br>
-<div id="search">
-    <a href="/books" class="btn btn-primary">Search</a>
-    </form>
-</div>
-<br>
 
-<div>
-    <h3>My favorite books</h3>
-    <ul>
-        {{#each user.favoriteBooks}}
-        <li>
-            {{this.title}} by {{this.author}}
-        </li>
-        {{/each}}
-    </ul>
-</div>
-<div>
-    <h3>My book clubs</h3>
-    <ul> 
-    {{#each user.clubs}}
-        <li>
-            {{this.clubname}}
-        </li>
-    {{/each}}   
-    </ul>
+    <h1>Hi {{ req.user.username }}!</h1>
+
+    <div class="row">
+        <div class="col-6">
+            <img src="/images/lisaicon.png">
+        </div>
+    </div>
+    <br>
+    <div id="search">
+        <a href="/books" class="btn btn-primary">Search Books</a>
+        <a href="/browse" class="btn btn-primary">Browse Clubs</a>
+        </form>
+    </div>
+    <br>
+
+    <div>
+        <h3>My favorite books</h3>
+        <ul>
+            {{#each user.favoriteBooks}}
+            <li>
+                {{this.title}} by {{this.author}}
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+    <div>
+        <h3>My book clubs</h3>
+        <ul>
+            {{#each user.clubs}}
+            <li>
+                <a href="club/{{this._id}}">{{this.clubname}}</a>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
 </div>

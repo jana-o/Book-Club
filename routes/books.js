@@ -29,53 +29,75 @@ function ensureAuthenticated(req, res, next) {
 
 router.get("/", ensureAuthenticated, (req, res, next) => {
   if (!req.query.q) {
-    res.render("books", {req});
-  }
-
-  else if (req.query.q){
+    res.render("books", { req });
+  } else if (req.query.q) {
     bookApi
-    .get(`/volumes?q=${req.query.q}`)
-    .then(response => {
-      // console.log(response.data.items.authors)
-      res.render("books", {
-        books: response.data.items, req, 
+      .get(`/volumes?q=${req.query.q}`)
+      .then(response => {
+        response.data.items.map(elem => {
+          if (elem.volumeInfo.imageLinks) {
+            let url = elem.volumeInfo.imageLinks.smallThumbnail;
+            console.log(url);
+            elem.volumeInfo.imgUrl = url.substring(url.indexOf("=", 0) + 1);
+          }
+        });
+        res.render("books", {
+          books: response.data.items,
+          req
+        });
+      })
+      .catch(err => {
+        console.log("Something went wrong!", err);
       });
-    })
-    .catch(err => {
-      console.log("Something went wrong!", err);
-    });
   }
-  
 });
 
 router.get("/:metadata/new-favorite", ensureAuthenticated, (req, res, next) => {
-  let m = req.params.metadata
-  let bookId = m.substring(0, m.indexOf("+",0));
-  let author = m.substring(m.indexOf("+",0) + 1, m.indexOf("+",m.indexOf("+",0) + 1))
-  let rev = m.split("").reverse().join("")
-  let title = rev.substring(0, rev.indexOf("+")).split("").reverse().join("")
+  let m = req.params.metadata;
+  let bookId = m.substring(m.indexOf("id=-os") + 6, m.indexOf("author"));
+  let author = m.substring(m.indexOf("author=") + 7, m.indexOf("title"));
+  let title = m.substring(m.indexOf("title=") + 6, m.indexOf("img"));
+  let imgUrl = m.substring(m.indexOf("img=") + 4);
   let userId = req.user._id;
 
-  User.findById(userId)
-    .then(user => {
-      // console.log(user.username)
-      // console.log("is favouriting: ", bookId)
-      Book.create({googleId: bookId,
-      author,
-      title})
-      .then ((bookObj) => {
-        user.favoriteBooks.push(bookObj);
-        user.save().then(updatedUser => {
-        //console.log("Book added to User.books -->", updatedUser);
-        res.render("mylibrary", { user, req });
-      });
+  User.findById(userId).then(user => {
+    Book.findOne({ googleId: bookId })
+      .then(book => {
+        // if book isn't in database, create it and push on their collection
+        if (!book) {
+          Book.create({
+            googleId: bookId,
+            author,
+            title,
+            icon: `http://books.google.com/books/content?id=${imgUrl}`
+          }).then(bookObj => {
+            user.favoriteBooks.push(bookObj);
+            user.save().then(updatedUser => {
+              //console.log("Book added to User.books -->", updatedUser);
+              res.render("mylibrary", { user, req });
+            });
+          });
+          // if it is in the database, push it on their collection
+        } else {
+          // if they don't already have it in their favourites that is
+          if (!user.favoriteBooks.map(id => id.toString()).includes(book._id.toString())) {
+            console.log("IF!")
+            user.favoriteBooks.push(book);
+            user.save().then(updatedUser => {
+              res.render("mylibrary", { user, req });
+            });
+          }
+          // else placebo
+          else {
+            console.log("ELSE!")
+            res.render("mylibrary", { user, req });
+          }
+        }
       })
-
-      
-    })
-    .catch(err => {
-      throw err;
-    });
+      .catch(err => {
+        throw err;
+      });
+  });
 });
 
 module.exports = router;
