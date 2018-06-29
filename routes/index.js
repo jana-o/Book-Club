@@ -63,9 +63,9 @@ router.get("/club/:id", ensureAuthenticated, (req, res, next) => {
   let clubId = req.params.id;
 
   Club.findById(clubId)
-  // TO DO!
-  // populate users works great, populate books doesn't work
-    .populate("users", "books")
+    // TO DO!
+    // populate users works great, populate books doesn't work
+    .populate(["books", "users"])
     .then(club => {
       let memberStatus = false;
       // this checks whether the user is a member of the club, redirecting them to the logged in version if they are
@@ -74,9 +74,8 @@ router.get("/club/:id", ensureAuthenticated, (req, res, next) => {
           memberStatus = true;
         }
       });
-      // I want ot search for the following book, then populate the page with its info! 
-      // console.log("club.books: ",club.books[club.books.length - 1])
-        res.render("club/clubProfile", { club, memberStatus, req });
+      let currentBook = club.books[club.books.length - 1];
+      res.render("club/clubProfile", { club, memberStatus, currentBook, req });
     })
     .catch(error => {
       console.log(error);

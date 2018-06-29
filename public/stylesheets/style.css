@@ -6400,9 +6400,7 @@ footer {
   border-radius: 5px; }
 
 .club-content > img {
-  margin: 20px 10px;
-  height: 20%;
-  width: 20%; }
+  margin: 5px; }
 
 .club-content > h5 {
   align-self: center; }
