@@ -1,12 +1,16 @@
 <div class="container">
 
-    <h1>Profile of: {{ user.username }}!</h1>
+    
 
     <div class="row">
-        <div class="col-6">
+        <div class="col-12 profile-info">
             <img src="/images/lisaicon.png">
         </div>
+        <div class="col-12 profile-info">
+            <h1>Profile of: {{ user.username }}!</h1>
+        </div>
     </div>
+    
     <br>
 
 <div class="row">
@@ -28,6 +32,7 @@
         <ul style="list-style-type:none">
             {{#each user.clubs}}
             <li>
+                <img src="../{{this.icon}}" class="home-img">
                 <a href="../club/{{this._id}}">{{this.clubname}}</a>
             </li>
             {{/each}}

@@ -143,7 +143,7 @@ footer {
   justify-content: space-around;
 }
 
-// club content by Cameron - sorry I'm really bad at this
+// club content by Cameron
 .club-card {
   min-width: 31vw;
   max-width: 90vw;
@@ -199,7 +199,12 @@ footer {
   margin-left: 0 !important;
 }
 
-// .container-main {
-//   max-width: 59rem;
-//   margin: 30px auto;
-// }
+// profile content
+
+.profile-info{
+  display: flex;
+  justify-content: center
+}
+.profile-info > img {
+  margin: 5px;
+}

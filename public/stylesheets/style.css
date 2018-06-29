@@ -6449,4 +6449,11 @@ footer {
   padding-left: 0 !important;
   margin-left: 0 !important; }
 
+.profile-info {
+  display: flex;
+  justify-content: center; }
+
+.profile-info > img {
+  margin: 5px; }
+
 /*# sourceMappingURL=style.css.map */
