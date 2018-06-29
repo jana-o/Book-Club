@@ -127,6 +127,12 @@ footer {
   color: white;
   padding: 30px;
 }
+//home 
+.home-img {
+  margin: 5px;
+  max-width: 6vw;
+}
+
 
 //Cards
 .cards-container {
@@ -136,7 +142,18 @@ footer {
 }
 
 // club content by Cameron - sorry I'm really bad at this
-
+.club-card {
+  min-width: 31vw;
+  max-width: 90vw;
+  margin-bottom: 5px
+}
+.browse-img{
+  min-width:15vw;
+  max-width:50%;
+}
+.content-center {
+  text-align: center
+}
 .club-content {
   //  text-align: center;
   display: flex;
@@ -145,6 +162,9 @@ footer {
   margin-top: 5px;
   padding: 5px;
   border-radius: 5px;
+}
+.club-content > div {
+  align-self: center
 }
 .club-content > img {
   margin: 5px;

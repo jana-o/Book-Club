@@ -74,7 +74,8 @@ router.get("/:metadata/new-favorite", ensureAuthenticated, (req, res, next) => {
             user.favoriteBooks.push(bookObj);
             user.save().then(updatedUser => {
               //console.log("Book added to User.books -->", updatedUser);
-              res.render("mylibrary", { user, req });
+              res.redirect("/mylibrary");
+              
             });
           });
           // if it is in the database, push it on their collection
@@ -84,13 +85,15 @@ router.get("/:metadata/new-favorite", ensureAuthenticated, (req, res, next) => {
             console.log("IF!")
             user.favoriteBooks.push(book);
             user.save().then(updatedUser => {
-              res.render("mylibrary", { user, req });
+              res.redirect("/mylibrary");
+              
             });
           }
           // else placebo
           else {
             console.log("ELSE!")
-            res.render("mylibrary", { user, req });
+            res.redirect("/mylibrary");
+              
           }
         }
       })

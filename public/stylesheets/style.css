@@ -6387,9 +6387,25 @@ footer {
   color: white;
   padding: 30px; }
 
+.home-img {
+  margin: 5px;
+  max-width: 6vw; }
+
 .cards-container {
   display: flex;
   justify-content: space-around; }
+
+.club-card {
+  min-width: 31vw;
+  max-width: 90vw;
+  margin-bottom: 5px; }
+
+.browse-img {
+  min-width: 15vw;
+  max-width: 50%; }
+
+.content-center {
+  text-align: center; }
 
 .club-content {
   display: flex;
@@ -6398,6 +6414,9 @@ footer {
   margin-top: 5px;
   padding: 5px;
   border-radius: 5px; }
+
+.club-content > div {
+  align-self: center; }
 
 .club-content > img {
   margin: 5px; }

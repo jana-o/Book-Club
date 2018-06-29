@@ -37,7 +37,7 @@ router.get("/home", ensureAuthenticated, (req, res, next) => {
 router.get("/user/:id", ensureAuthenticated, (req, res, next) => {
   let userId = req.params.id;
   console.log(userId);
-  User.findOne({ _id: userId })
+  User.findOne({ _id: userId }).populate("clubs").populate("favoriteBooks")
     .then(user => {
       res.render("profile", { user, req });
     })

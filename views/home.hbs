@@ -1,6 +1,5 @@
 <div class="container">
 
-
     <h1>Hi {{ req.user.username }}!</h1>
 
     <div class="row">
@@ -18,17 +17,18 @@
 
     <div>
         <h3>My favorite books</h3>
-        <ul>
+        <ul style="list-style-type:none">
             {{#each user.favoriteBooks}}
             <li>
-                {{this.title}} by {{this.author}}
+                <img src="{{this.icon}}" class="home-img">
+                <strong>{{this.title}}</strong> by {{this.author}}
             </li>
             {{/each}}
         </ul>
     </div>
     <div>
         <h3>My book clubs</h3>
-        <ul>
+        <ul style="list-style-type:none">
             {{#each user.clubs}}
             <li>
                 <a href="club/{{this._id}}">{{this.clubname}}</a>
