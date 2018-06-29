@@ -28,6 +28,19 @@
     <h5><strong>{{currentBook.title}}</strong> by {{currentBook.author}} </h5>
   </div>
 
+  <h5>Videos: </h5>
+  {{!-- <div class="club-content"> --}}
+    <div class="row">
+    {{#each videos}}
+      <div class="col-sm-4 d-flex align-items-stretch">
+        <iframe id="ytplayer" class="video-container" type="text/html" width="100%"
+        {{!-- width="640" height="360" --}}
+          src="{{this}}"
+          frameborder="0"></iframe>
+      </div>    
+    {{/each}}
+    </div>
+  {{!-- </div> --}}
 
   <div class="club-btn">
     {{#if memberStatus}}

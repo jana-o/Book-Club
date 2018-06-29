@@ -133,7 +133,9 @@ footer {
   max-width: 6vw;
 }
 
-
+.btn-primary {
+  margin: 5px
+}
 //Cards
 .cards-container {
   display: flex;
@@ -172,14 +174,7 @@ footer {
 .club-content > h5 {
   align-self: center;
 }
-#videos {
-  display: flex;
-  justify-content: center;
-}
 .video-container {
-  height: 70px;
-  width: 124px;
-  background-color: beige;
   margin: 3px;
 }
 .container > .btn-primary {

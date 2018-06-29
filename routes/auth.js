@@ -83,7 +83,7 @@ authRoutes.post("/signup", (req, res, next) => {
 });
 
 authRoutes.get("/confirm/:hashpass", (req, res, next) => {
-  let hashpass = req.params.hashpass;
+  let hashpass = req.params.hashpass.replace(/\//g, "");
   let query = { password: hashpass };
 
   User.findOneAndUpdate(query, { confirmationStatus: "confirmed" })

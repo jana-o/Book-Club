@@ -6391,6 +6391,9 @@ footer {
   margin: 5px;
   max-width: 6vw; }
 
+.btn-primary {
+  margin: 5px; }
+
 .cards-container {
   display: flex;
   justify-content: space-around; }
@@ -6424,14 +6427,7 @@ footer {
 .club-content > h5 {
   align-self: center; }
 
-#videos {
-  display: flex;
-  justify-content: center; }
-
 .video-container {
-  height: 70px;
-  width: 124px;
-  background-color: beige;
   margin: 3px; }
 
 .container > .btn-primary {

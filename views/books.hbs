@@ -7,8 +7,9 @@
     {{/if}}
     <form method="get">
         <input type="text" name="q" placeholder="Book name">
-        <button type="submit">Search</button>
+        <button class="btn btn-primary" type="submit">Search</button>
     </form>
+    <a href="../home" class="btn btn-primary">Return to Profile</a>
     {{#if req.query.q}}
         {{#each books}}
         {{!-- <div class="row">

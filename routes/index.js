@@ -1,12 +1,20 @@
 const express = require("express");
 const passport = require("passport");
-const router = express.Router();
 
+const router = express.Router();
+const axios = require("axios");
 const mongoose = require("mongoose");
 
 const User = require("../models/User");
 const Club = require("../models/Club");
 const Book = require("../models/Book");
+
+// youtube api setup
+
+const videoApi = axios.create({
+  baseURL: "https://www.googleapis.com/youtube/v3/"
+  // baseURL: "https://developers.google.com/apis-explorer/#p/youtube/v3/"
+});
 
 //Middleware;
 
@@ -37,7 +45,9 @@ router.get("/home", ensureAuthenticated, (req, res, next) => {
 router.get("/user/:id", ensureAuthenticated, (req, res, next) => {
   let userId = req.params.id;
   console.log(userId);
-  User.findOne({ _id: userId }).populate("clubs").populate("favoriteBooks")
+  User.findOne({ _id: userId })
+    .populate("clubs")
+    .populate("favoriteBooks")
     .then(user => {
       res.render("profile", { user, req });
     })
@@ -75,7 +85,17 @@ router.get("/club/:id", ensureAuthenticated, (req, res, next) => {
         }
       });
       let currentBook = club.books[club.books.length - 1];
-      res.render("club/clubProfile", { club, memberStatus, currentBook, req });
+      let query = currentBook.title.replace(/ /g,"-");
+      console.log("youtube api search for: ", query)
+      videoApi.get(`search?part=snippet&order=viewCount&q=${query}&type=video&videoDefinition=high&key=${process.env.GOOGLE_API_KEY}`)
+      .then((response) => {
+        console.log(response.data.items[0].id.videoId)
+        // might need to include  an origin tag like this: &origin=http://example.com
+        let videos = [`https://www.youtube.com/embed/${response.data.items[0].id.videoId}?autoplay=0`,
+                      `https://www.youtube.com/embed/${response.data.items[1].id.videoId}?autoplay=0`,
+                      `https://www.youtube.com/embed/${response.data.items[2].id.videoId}?autoplay=0`]
+        res.render("club/clubProfile", { club, memberStatus, currentBook, videos, req });
+      })
     })
     .catch(error => {
       console.log(error);
