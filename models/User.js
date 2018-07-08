@@ -10,8 +10,8 @@ const userSchema = new Schema(
     clubs: [{ type: Schema.Types.ObjectId, ref: "Club" }],
     favoriteBooks: [{ type: Schema.Types.ObjectId, ref: "Book" }],
     icon: String,
-    role: { type: String, enum: ["admin", "normal"], default: "normal" },
-    confirmationStatus: { type: String, default: "awaiting" }
+    confirmationStatus: { type: String, default: "awaiting" },
+    confirmationLink: { type: String }
   },
   {
     timestamps: {

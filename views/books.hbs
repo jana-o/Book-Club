@@ -1,16 +1,38 @@
 <div class="container">
+
+    {{#if req.query.q}}
+    <h3>Results:</h3>
+    {{else}}
+    <h3>Enter the name of a book you want to favourite!</h3>
+    {{/if}}
     <form method="get">
         <input type="text" name="q" placeholder="Book name">
-        <button type="submit">Search</button>
+        <button class="btn btn-primary" type="submit">Search</button>
     </form>
-    <div class="row">
+    <a href="../home" class="btn btn-primary">Return to Profile</a>
+    {{#if req.query.q}}
         {{#each books}}
-        <div class="col-lg-4">
+        {{!-- <div class="row">
+            <img src="{{this.volumeInfo.imageLinks.smallThumbnail}}">
             <p>
-                {{this.volumeInfo.title}}
-                <a href='/books/{{this.id}}+{{this.volumeInfo.authors.[0]}}+{{this.volumeInfo.title}}/new-favorite' class='btn btn-success btn-sm'>Save</a>
+                {{this.volumeInfo.title}} by {{this.volumeInfo.authors.[0]}}
+                <a href='/books/id={{this.id}}author={{this.volumeInfo.authors.[0]}}title={{this.volumeInfo.title}}img={{this.volumeInfo.imgUrl}}/new-favorite'
+                    class='btn btn-success btn-sm'>Save</a>
             </p>
-        </div>
-    </div>
-    {{/each}}
+        </div> --}}
+        <table class="table no-margin-left">
+        <tbody>
+            <tr>
+                <td><img src="{{this.volumeInfo.imageLinks.smallThumbnail}}" class="search-img"></td>
+                <td>{{this.volumeInfo.title}}</td>
+                <td>{{this.volumeInfo.authors.[0]}}</td>
+                <td><a href='/books/id={{this.id}}author={{this.volumeInfo.authors.[0]}}title={{this.volumeInfo.title}}img={{this.volumeInfo.imgUrl}}/new-favorite'
+                    class='btn btn-success btn-sm'>Save</a></td>
+            </tr>
+        </tbody>
+    </table>
+        {{/each}}
+    {{/if}}
+
+    
 </div>

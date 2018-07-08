@@ -1,12 +1,20 @@
 const express = require("express");
 const passport = require("passport");
-const router = express.Router();
 
+const router = express.Router();
+const axios = require("axios");
 const mongoose = require("mongoose");
 
 const User = require("../models/User");
 const Club = require("../models/Club");
 const Book = require("../models/Book");
+
+// youtube api setup
+
+const videoApi = axios.create({
+  baseURL: "https://www.googleapis.com/youtube/v3/"
+  // baseURL: "https://developers.google.com/apis-explorer/#p/youtube/v3/"
+});
 
 //Middleware;
 
@@ -18,6 +26,7 @@ function ensureAuthenticated(req, res, next) {
   }
 }
 
+<<<<<<< HEAD
 //Middleware Role
 
 function checkRoles(role) {
@@ -30,6 +39,8 @@ function checkRoles(role) {
   };
 }
 
+=======
+>>>>>>> 20cda2497c4008587f7265f3c233f386ce6d3303
 /* GET INDEX page */
 router.get("/", (req, res, next) => {
   res.render("index", { req });
@@ -37,7 +48,16 @@ router.get("/", (req, res, next) => {
 
 /* GET home page */
 router.get("/home", ensureAuthenticated, (req, res, next) => {
+<<<<<<< HEAD
   res.render("home", { req });
+=======
+  User.findById(req.user._id)
+    .populate("favoriteBooks")
+    .populate("clubs")
+    .then(user => {
+      res.render("home", { req, user });
+    });
+>>>>>>> 20cda2497c4008587f7265f3c233f386ce6d3303
 });
 
 /* GET Profile*/
@@ -45,6 +65,8 @@ router.get("/user/:id", ensureAuthenticated, (req, res, next) => {
   let userId = req.params.id;
   console.log(userId);
   User.findOne({ _id: userId })
+    .populate("clubs")
+    .populate("favoriteBooks")
     .then(user => {
       res.render("profile", { user, req });
     })
@@ -69,19 +91,30 @@ router.get("/browse", ensureAuthenticated, (req, res, next) => {
 router.get("/club/:id", ensureAuthenticated, (req, res, next) => {
   let clubId = req.params.id;
 
-  Club.findOne({ _id: clubId })
-    .populate("users")
+  Club.findById(clubId)
+    // TO DO!
+    // populate users works great, populate books doesn't work
+    .populate(["books", "users"])
     .then(club => {
       let memberStatus = false;
       // this checks whether the user is a member of the club, redirecting them to the logged in version if they are
       club.users.forEach(elem => {
-        console.log(elem);
         if (elem.username === req.user.username) {
-          console.log("user is a member of this club");
           memberStatus = true;
         }
       });
-      res.render("club/clubProfile", { club, memberStatus, req });
+      let currentBook = club.books[club.books.length - 1];
+      let query = currentBook.title.replace(/ /g,"-");
+      console.log("youtube api search for: ", query)
+      videoApi.get(`search?part=snippet&order=viewCount&q=${query}&type=video&videoDefinition=high&key=${process.env.GOOGLE_API_KEY}`)
+      .then((response) => {
+        console.log(response.data.items[0].id.videoId)
+        // might need to include  an origin tag like this: &origin=http://example.com
+        let videos = [`https://www.youtube.com/embed/${response.data.items[0].id.videoId}?autoplay=0`,
+                      `https://www.youtube.com/embed/${response.data.items[1].id.videoId}?autoplay=0`,
+                      `https://www.youtube.com/embed/${response.data.items[2].id.videoId}?autoplay=0`]
+        res.render("club/clubProfile", { club, memberStatus, currentBook, videos, req });
+      })
     })
     .catch(error => {
       console.log(error);

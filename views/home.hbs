@@ -1,35 +1,45 @@
-<h1>HOME</h1>
+<div class="container">
 
-<div class="row">
-    <div class="col-6">
-        <img src="/images/lisaicon.png">
+    <div class="row">
+        <div class="col-12 profile-info">
+            <img src="/images/lisaicon.png">
+        </div>
+        <div class="col-12 profile-info">
+            <h1> Hi {{ user.username }}!</h1>
+        </div>
+        <br>
+        <div class="col-12 profile-info">
+            <div id="search">
+                <a href="/books" class="btn btn-primary">Search Books</a>
+                <a href="/browse" class="btn btn-primary">Browse Clubs</a>
+                </form>
+            </div>
+        </div>
+        <br>
     </div>
-    <div class="col-6">
-        <h3>Hi
-            <span>{{ user.username}}</span> !
-        </h3>
-    </div>
-</div>
-<div id="search">
-    <a href="/books" class="btn btn-primary">Search</a>
-    </form>
-</div>
 
-<div>
-    <h3>My favorite books</h3>
-    {{#each user}}
-    <ul>
-        <li>
-            {{this.books}}
-        </li>
-    </ul>
-    {{/each}}
-</div>
-<div>
-    <h3>My book clubs</h3>
-    <ul> {{#each user.clubs}}
-        <li>
-            {{this}}
-        </li>
-    </ul>{{/each}}
+    <div class="row">
+        <div class="col-6">
+            <h3>My favorite books</h3>
+            <ul style="list-style-type:none">
+                {{#each user.favoriteBooks}}
+                <li>
+                    <img src="{{this.icon}}" class="home-img">
+                    <strong>{{this.title}}</strong> by {{this.author}}
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+        <div class="col-6">
+            <h3>My book clubs</h3>
+            <ul style="list-style-type:none">
+                {{#each user.clubs}}
+                <li>
+                    <img src="{{this.icon}}" class="home-img">
+                    <a href="club/{{this._id}}">{{this.clubname}}</a>
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
 </div>

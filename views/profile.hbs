@@ -1,40 +1,41 @@
-<h1>Test Profile</h1>
+<div class="container">
+
+    
+
+    <div class="row">
+        <div class="col-12 profile-info">
+            <img src="/images/lisaicon.png">
+        </div>
+        <div class="col-12 profile-info">
+            <h1>Profile of: {{ user.username }}!</h1>
+        </div>
+    </div>
+    
+    <br>
 
 <div class="row">
     <div class="col-6">
-        <img src="/images/lisaicon.png">
+        <h3>{{ user.username }}'s favorite books</h3>
+        {{!-- {{user.favoriteBooks}} --}}
+        <ul style="list-style-type:none">
+            {{#each user.favoriteBooks}}
+            <li>
+                <img src="{{this.icon}}" class="home-img">
+                <strong>{{this.title}}</strong> by {{this.author}}
+            </li>
+            {{/each}}
+        </ul>
     </div>
     <div class="col-6">
-        <h3>Hi
-            <span>{{ user.username}}</span> !
-        </h3>
+        <h3>{{ user.username }}'s book clubs</h3>
+        {{!-- {{user.clubs}} --}}
+        <ul style="list-style-type:none">
+            {{#each user.clubs}}
+            <li>
+                <img src="../{{this.icon}}" class="home-img">
+                <a href="../club/{{this._id}}">{{this.clubname}}</a>
+            </li>
+            {{/each}}
+        </ul>
     </div>
-</div>
-<div id="search">
-    <form id="myForm">
-        <div class="input-field">
-            <input type="search" id="books">
-            <label for="search">Search books</label>
-        </div>
-        <button class="btn btn-primary">Search</button>
-    </form>
-</div>
-
-<div>
-    <h3>My favorite books</h3>
-    {{#each user}}
-    <ul>
-        <li>
-            {{this.books}}
-        </li>
-    </ul>
-    {{/each}}
-</div>
-<div>
-    <h3>My book clubs</h3>
-    <ul> {{#each user.clubs}}
-        <li>
-            {{this}}
-        </li>
-    </ul>{{/each}}
-</div>
+ </div>   

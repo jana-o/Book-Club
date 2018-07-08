@@ -3,8 +3,26 @@
     <div class="card-group">
         <div class="row">
             {{#each club}}
-            <div class="col-4">
-                {{> clubCard this}}
+            <div class="col-sm-4 d-flex align-items-stretch">
+                {{!-- {{> clubCard}} --}}
+
+                <div class="card-group club-card">
+                    <div class="card">
+                        <img class="card-img-top mx-auto browse-img" src="{{this.books.[0].icon}}" alt="Card image cap">
+                        <div class="card-body content-center">
+                            <a href="club/{{this._id}}">
+                                <h5 class="card-title">{{this.clubname}}</h5>
+                            </a>
+                            <p class="card-title">
+                                
+                                <strong>Current book: </strong> {{this.books.[0].title}} </p>
+                            <p class="card-title">
+                                <strong>Author: </strong>{{this.books.[0].author}}</p>
+                            
+                        </div>
+                    </div>
+                </div>
+
             </div>
             {{/each}}
         </div>

@@ -52,14 +52,15 @@ authRoutes.post("/signup", (req, res, next) => {
   const newUser = new User({
     username,
     password: hashPass,
-    email
+    email,
+    confirmationLink: hashPass.replace(/\//g, "")
   });
 
   newUser.save(err => {
     if (err) {
       res.render("auth/signup", { message: "Something went wrong" });
     } else {
-      res.redirect("/home");
+      res.render("auth/signup", { message: `Account confirmation link sent to ${email}. Please confirm your account to log in to Readerly.` });;
     }
   });
 
@@ -76,15 +77,15 @@ authRoutes.post("/signup", (req, res, next) => {
       from: '"Readerly" <nahom.delfino@gmail.com>',
       to: email,
       subject: "Welcome to Readerly! Account Confirmation Link",
-      text: `Welcome to Readerly, the newest micro book-club platform! Please follow this link to confirm your registration and start using the platform: http://localhost:3000/auth/confirm/${hashPass}. We look forward to seeing you soon!`,
-      html: `<b>Welcome to Readerly, the newest micro book-club platform! Please follow this link to confirm your registration and start using the platform: <a href="http://localhost:3000/auth/confirm/${hashPass}">Account Confirmation Link</a>. We look forward to seeing you soon!</b>`
+      text: `Welcome to Readerly, the newest micro book-club platform! Please follow this link to confirm your registration and start using the platform: https://readerly-project.herokuapp.com/auth/confirm/${hashPass.replace(/\//g, "")}. We look forward to seeing you soon!`,
+      html: `<b>Welcome to Readerly, the newest micro book-club platform! Please follow this link to confirm your registration and start using the platform: <a href="https://readerly-project.herokuapp.com/auth/confirm/${hashPass.replace(/\//g, "")}">Account Confirmation Link</a>. We look forward to seeing you soon!</b>`
     })
     .catch(error => console.log(error));
 });
 
-authRoutes.get("/confirm/:hashpass", (req, res, next) => {
-  let hashpass = req.params.hashpass;
-  let query = { password: hashpass };
+authRoutes.get("/confirm/:confirmation", (req, res, next) => {
+  let confirmation = req.params.confirmation
+  let query = { confirmationLink: confirmation };
 
   User.findOneAndUpdate(query, { confirmationStatus: "confirmed" })
     .then(() => {

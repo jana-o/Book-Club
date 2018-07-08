@@ -1,4 +1,5 @@
-<div class="card-group">
+
+<div class="card-group club-card">
     <div class="card">
         <img class="card-img-top mx-auto" src="{{this.icon}}" alt="Card image cap">
         <div class="card-body">
@@ -7,11 +8,11 @@
             </a>
             <p class="card-title">
                 <strong>Current book: </strong>
-                {{#each this.books}} {{#if @last}} {{this.title}} {{/if}} {{/each}}
-            </p>
+                {{#each this.books}} {{#if @last}} {{this.books.title}}</p>
             <p class="card-title">
-                <strong>Author: </strong>{{this.currBook.author}}</p>
-
+                <strong>Author: </strong>{{this.books.author}}</p>
+            {{/if}} 
+            {{/each}}
         </div>
     </div>
 </div>
