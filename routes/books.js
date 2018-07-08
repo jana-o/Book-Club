@@ -19,12 +19,21 @@ const bookApi = axios.create({
 //   res.render("books");
 // });
 
-router.get("/", (req, res, next) => {
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated() && req.user.confirmationStatus === "confirmed") {
+    return next();
+  } else {
+    res.redirect("auth/login");
+  }
+}
+
+router.get("/", ensureAuthenticated, (req, res, next) => {
   bookApi
     .get(`/volumes?q=${req.query.q}`)
     .then(response => {
+      // console.log(response.data.items.authors)
       res.render("books", {
-        books: response.data.items
+        books: response.data.items, req
       });
     })
     .catch(err => {
@@ -32,30 +41,45 @@ router.get("/", (req, res, next) => {
     });
 });
 
-router.get("/search", (req, res, next) => {
-  bookApi
-    .get(`/volumes?q=${req.query.q}`)
-    .then(response => {
-      res.render("search", {
-        books: response.data.items
-      });
-    })
-    .catch(err => {
-      console.log("Something went wrong!", err);
-    });
-});
+// router.get("/search", (req, res, next) => {
+//   bookApi
+//     .get(`/volumes?q=${req.query.q}`)
+//     .then(response => {
+//       res.render("search", {
+//         books: response.data.items
+//       });
+//     })
+//     .catch(err => {
+//       console.log("Something went wrong!", err);
+//     });
+// });
 
 router.get("/:googleId/new-favorite", (req, res, next) => {
   let bookId = req.params.id;
+router.get("/:metadata/new-favorite", ensureAuthenticated, (req, res, next) => {
+  let m = req.params.metadata
+  let bookId = m.substring(0, m.indexOf("+",0));
+  let author = m.substring(m.indexOf("+",0) + 1, m.indexOf("+",m.indexOf("+",0) + 1))
+  let rev = m.split("").reverse().join("")
+  let title = rev.substring(0, rev.indexOf("+")).split("").reverse().join("")
   let userId = req.user._id;
 
   User.findById(userId)
     .then(user => {
-      user.favoriteBooks.push(bookId);
-      user.save().then(updatedUser => {
+      // console.log(user.username)
+      // console.log("is favouriting: ", bookId)
+      Book.create({googleId: bookId,
+      author,
+      title})
+      .then ((bookObj) => {
+        user.favoriteBooks.push(bookObj);
+        user.save().then(updatedUser => {
         //console.log("Book added to User.books -->", updatedUser);
-        res.render("mylibrary", { user });
+        res.render("mylibrary", { user, req });
       });
+      })
+
+      
     })
     .catch(err => {
       throw err;
